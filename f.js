@@ -1,5 +1,4 @@
 /* ===== DATOS: tu dataset verificado (208 registros) ===== */
-/* ===== DATOS: tu dataset verificado (208 registros) ===== */
 const rawTransactions = [
     { id: 1, fecha: "06 ENE 26", mes: "ENERO", cotizacion: "220 - 8159", factura: "FICCXX - 4639", cuenta: "ADSA", monto: 1865.28, montoSinIva: 1608.0, producto: "(2-PRAKTICA)" },
     { id: 2, fecha: "12 ENE 26", mes: "ENERO", cotizacion: "220 - 8216", factura: "FICCXX - 4667", cuenta: "ADSA", monto: 6936.94, montoSinIva: 5980.12, producto: "(2-ENDURENCE)(2-IMPER3AÑ0S)" },
@@ -236,28 +235,23 @@ const ALIAS = {
 const VISTA = { 'KEKEN': 'KEKÉN' }; // cómo se muestra un nombre en pantalla
 const GRUPO_MAYO = ['KEKEN', 'HACIENDA XCANATUN', 'SERVICIOS INMOBILIARIOS TURISTICOS'];
 
-// Vendedores del VDT. Javier (2026) sale del dataset; el resto está aquí.
-// [mes, Carlos, Javier (null = tomar del dataset), Aarón]
-const VDT = [
+// Historial 2025 de los tres vendedores: [mes, Carlos, Javier, Aarón]
+const HIST_2025 = [
     ["Ago '25", 25030.17, 62105.17, 429282.76],
     ["Sep '25", 23009.48, 105939.66, 507389.66],
     ["Oct '25", 46025.00, 157823.28, 298976.72],
     ["Nov '25", 98744.83, 132137.07, 900280.17],
-    ["Dic '25", 96914.66, 62985.34, 268767.72],
-    ["Ene '26", 44329.31, null, 151835.34],
-    ["Feb '26", 75615.52, null, 582231.90],
-    ["Mar '26", 23277.59, null, 952066.38],
-    ["Abr '26", 35462.07, null, 337859.48],
-    ["May '26", 77859.48, null, 314118.97],
-    ["Jun '26", 88008.62, null, 363098.28],
-    ["Jul '26", 80360.34, null, 566065.52],
-    ["Ago '26", 59389.66, null, 1459627.59],
-    ["Sep '26", 110454.31, null, 337925.86]
+    ["Dic '25", 96914.66, 62985.34, 268767.72]
+];
+// 2026: [Carlos, Aarón] por mes (Ene, Feb, ...). Agrega una fila cada mes. Javier sale del dataset.
+const OTROS_2026 = [
+    [44329.31, 151835.34], [75615.52, 582231.90], [23277.59, 952066.38], [35462.07, 337859.48], [77859.48, 314118.97],
+    [88008.62, 363098.28], [80360.34, 566065.52], [59389.66, 1459627.59], [110454.31, 337925.86]
 ];
 const SERIES = [
-    { nombre: 'Carlos', color: '#9b59b6', col: 1, foto: 'IMAGENES/carlos.jpeg' },
-    { nombre: 'Javier', color: '#f1c40f', col: 2, foto: 'IMAGENES/javier.jpeg' },
-    { nombre: 'Aarón',  color: '#e74c3c', col: 3, foto: 'IMAGENES/aaron.jpeg' }
+    { nombre: 'Carlos', color: '#9b59b6', foto: 'IMAGENES/carlos.jpeg' },
+    { nombre: 'Javier', color: '#f1c40f', foto: 'IMAGENES/javier.jpeg' },
+    { nombre: 'Aarón',  color: '#e74c3c', foto: 'IMAGENES/aaron.jpeg' }
 ];
 
 /* ===================== Utilidades ===================== */
@@ -284,11 +278,6 @@ const segCurva = (a, b) => {
     const mx = (a.x + b.x) / 2;
     return ` C ${mx} ${a.y}, ${mx} ${b.y}, ${b.x} ${b.y}`;
 };
-function curva(p) {
-    let d = `M ${p[0].x} ${p[0].y}`;
-    for (let i = 1; i < p.length; i++) d += segCurva(p[i - 1], p[i]);
-    return d;
-}
 
 function conectarTooltip(contenedor, tip, selector, texto) {
     const alMover = e => {
@@ -323,19 +312,21 @@ datos.forEach(t => {
 const top3 = obj => Object.entries(obj).sort((a, b) => b[1] - a[1]).slice(0, 3);
 const etiquetaMes = i => MESES[i] + (i === ultimo ? '*' : '');
 
-/* ===================== Estado VDT ===================== */
-const X_PASO = 65;
-const RADIO_PUNTO = 22; // tamaño de los círculos / fotos de cada vendedor (px)
-const MS_POR_MES = 700; // duración de cada mes a velocidad 1x
-const N_VDT = VDT.length;
-let pos = 0, jugando = false, raf = 0, ultimoT = 0, vel = 1, idxVis = -1;
-const grupos = [];
+/* ===================== Estado de la gráfica de tendencia ===================== */
+const MS_POR_MES = 700;  // duración de cada mes a velocidad 1x
+const RADIO_PUNTO = 22;  // tamaño de los círculos / fotos de cada vendedor (px)
+const ANCHO_X = 845;     // ancho útil del eje de meses
 const btnPlay = $('#btnPlay');
 const btnReset = $('#btnReset');
 const timeline = $('#videoTimeline');
 const timelineLabel = $('#timelineLabel');
 const selVel = $('#velocidadVdt');
 const acumEl = $('#acumVdt');
+let periodo = '2026';                   // '2026' o 'todo' (desde Ago '25)
+const activos = new Set(['Javier']);    // vendedores visibles en la gráfica
+let rango = [], series = [], grupos = [];
+let pos = 0, jugando = false, raf = 0, ultimoT = 0, vel = 1, idxVis = -1;
+const chipVal = {};
 
 /* ===================== Pestañas ===================== */
 const tabs = $$('.tab-button');
@@ -370,39 +361,6 @@ function pintarResumen() {
         $(`#anual-c${i + 1}-nombre`).textContent = `${i + 1}. ${vista(c)}`;
         $(`#anual-c${i + 1}-monto`).textContent = fmt(v);
     });
-}
-
-/* ===================== 2. Tendencia mensual ===================== */
-function dibujarTendencia() {
-    const svg = $('#svgTendencia');
-    const techo = Math.ceil(Math.max(...totales) / 100000) * 100000;
-    const y = v => 250 - v / techo * 235;
-    const pasoX = mesesN > 1 ? 800 / (mesesN - 1) : 0;
-
-    for (let v = techo; v >= 100000; v -= 100000) {
-        const meta = v === 100000, yy = y(v);
-        svg.append(
-            el('text', { x: -15, y: yy + 4, class: meta ? 'etiqueta-100k' : 'axis-label', 'text-anchor': 'end' }, (v / 1000) + 'k'),
-            el('line', { x1: 0, y1: yy, x2: 800, y2: yy, class: meta ? 'linea-100k' : 'grid-line' })
-        );
-        if (meta) svg.append(el('text', { x: 810, y: yy + 4, class: 'etiqueta-100k' }, 'Meta Base'));
-    }
-    svg.append(
-        el('text', { x: -15, y: 254, class: 'axis-label', 'text-anchor': 'end' }, '0'),
-        el('line', { x1: 0, y1: 250, x2: 800, y2: 250, class: 'axis-base' })
-    );
-
-    const pts = totales.map((v, i) => ({ x: i * pasoX, y: y(v) }));
-    const linea = pts.length > 1 ? curva(pts) : `M 0 ${pts[0].y}`;
-    svg.append(
-        el('path', { d: `M 0 250 L${linea.slice(1)} L ${pts[pts.length - 1].x} 250 Z`, fill: 'rgba(52,152,219,.15)' }),
-        el('path', { d: linea, fill: 'none', stroke: '#2980b9', 'stroke-width': 4 })
-    );
-    pts.forEach((p, i) => svg.append(
-        el('circle', { cx: p.x, cy: p.y, r: 7, fill: '#3498db', class: 'punto-grafica', 'data-val': fmt(totales[i]) + (i === ultimo ? ' (mes en curso)' : '') }),
-        el('text', { x: p.x, y: 275, class: 'axis-label', 'text-anchor': 'middle' }, etiquetaMes(i))
-    ));
-    conectarTooltip($('#contenedor-svg'), $('#tooltip-svg'), '.punto-grafica', n => n.getAttribute('data-val'));
 }
 
 /* ===================== 3. Mayo ===================== */
@@ -491,67 +449,96 @@ function iniciarComparativa() {
     });
 }
 
-/* ===================== 7. Cronología VDT (se reproduce como un video) ===================== */
+/* ===================== 2. Tendencia y comparativo de vendedores ===================== */
 // Escala partida: bajo 500k, 25k = 15 px; sobre 500k, 200k = 21 px
-function yVdt(v) {
+function yEsc(v) {
     if (v <= 500000) return 417 - (v / 500000) * 300;
     return 117 - (Math.min(v - 500000, 1000000) / 1000000) * 105;
 }
 const etiquetaEje = v => v >= 1e6 ? (v / 1e6) + 'M' : v ? (v / 1e3) + 'k' : '0';
-const valorVdt = (fila, i, col) => fila[col] ?? totales[i - 5] ?? 0; // Javier 2026 = dataset
-
 const lerp = (a, b, u) => ({ x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u });
 
-// Tramo de curva entre a y b recortado a la fracción u (algoritmo de De Casteljau)
+// Tramo de curva entre a y b recortado a la fracción u (De Casteljau): devuelve el trazo y su x final
 function tramoParcial(a, b, u) {
     const mx = (a.x + b.x) / 2;
     const c1 = { x: mx, y: a.y }, c2 = { x: mx, y: b.y };
     const p = lerp(a, c1, u), q = lerp(c1, c2, u), r = lerp(c2, b, u);
     const s = lerp(p, q, u), t = lerp(q, r, u), f = lerp(s, t, u);
-    return ` C ${p.x} ${p.y}, ${s.x} ${s.y}, ${f.x} ${f.y}`;
+    return { d: ` C ${p.x} ${p.y}, ${s.x} ${s.y}, ${f.x} ${f.y}`, x: f.x };
 }
 
-function construirVdt() {
-    const svg = $('#svgCronologia');
+// Línea de tiempo completa: 2025 (tabla) + 2026 (Javier del dataset; Carlos y Aarón de OTROS_2026)
+let LINEA = [];
+function construirLinea() {
+    LINEA = [
+        ...HIST_2025.map(([mes, c, j, a]) => ({ mes, v: { Carlos: c, Javier: j, 'Aarón': a } })),
+        ...totales.map((t, m) => ({
+            mes: `${MESES[m]} '26`,
+            parcial: m === ultimo,
+            v: { Carlos: OTROS_2026[m]?.[0] ?? null, Javier: t, 'Aarón': OTROS_2026[m]?.[1] ?? null }
+        }))
+    ];
+}
 
-    const defs = el('defs');
-    const clip = el('clipPath', { id: 'recorte-foto' });
+// Redibuja la gráfica completa según el periodo y los vendedores elegidos
+function construir() {
+    pausar();
+    const svg = $('#svgTendencia');
+    svg.replaceChildren();
+    rango = LINEA.slice(periodo === '2026' ? HIST_2025.length : 0);
+    const N = rango.length, pasoX = ANCHO_X / (N - 1);
+    const lista = SERIES.filter(s => activos.has(s.nombre));
+
+    let max = 0;
+    lista.forEach(s => rango.forEach(f => { max = Math.max(max, f.v[s.nombre] ?? 0); }));
+    const partida = max > 500000; // si alguien pasa de 500k se usa la escala partida
+    svg.setAttribute('viewBox', partida ? '-85 -30 1030 490' : '-85 85 1030 375');
+
+    const defs = el('defs'), clip = el('clipPath', { id: 'recorte-foto' });
     clip.append(el('circle', { r: RADIO_PUNTO - 2 }));
     defs.append(clip);
     svg.append(defs);
 
-    const marcas = [1.5e6, 1.3e6, 1.1e6, 9e5, 7e5, 5e5];
-    for (let v = 475e3; v >= 0; v -= 25e3) marcas.push(v);
+    const marcas = partida ? [1.5e6, 1.3e6, 1.1e6, 9e5, 7e5, 5e5] : [];
+    const salto = partida ? 25e3 : 50e3;
+    for (let v = partida ? 5e5 - salto : 5e5; v >= 0; v -= salto) marcas.push(v);
     marcas.forEach(v => {
-        const yy = yVdt(v), meta = v === 1e5;
+        const yy = yEsc(v), meta = v === 1e5;
         const clase = v === 0 ? 'axis-base' : meta ? 'linea-meta' : v <= 5e5 ? 'grid-line fino' : 'grid-line';
         svg.append(
             el('text', { x: -30, y: yy + 4, class: 'axis-label' + (meta ? ' meta' : ''), 'text-anchor': 'end' }, etiquetaEje(v)),
-            el('line', { x1: 0, y1: yy, x2: 845, y2: yy, class: clase })
+            el('line', { x1: 0, y1: yy, x2: ANCHO_X, y2: yy, class: clase })
         );
+        if (meta) svg.append(el('text', { x: ANCHO_X + 12, y: yy + 5, class: 'etiqueta-100k' }, 'Meta Base'));
     });
 
-    // Puntos y curva acumulada de cada vendedor: se calculan UNA vez, no en cada cuadro
-    SERIES.forEach(s => {
-        s.pts = VDT.map((fila, i) => ({ x: i * X_PASO, y: yVdt(valorVdt(fila, i, s.col)) }));
-        let suma = 0; // acumulado desde el primer mes de la gráfica
-        s.total = VDT.map((fila, i) => (suma += valorVdt(fila, i, s.col)));
-        s.acum = [];
-        s.pts.forEach((p, i) => s.acum.push(i ? s.acum[i - 1] + segCurva(s.pts[i - 1], p) : `M ${p.x} ${p.y}`));
-        s.path = el('path', { fill: 'none', stroke: s.color, 'stroke-width': 3, d: s.acum[0] });
-        svg.append(s.path);
+    // Cada vendedor: puntos, acumulado y curva. Se asume que tiene datos desde el primer mes del rango hasta el último con dato.
+    series = lista.map(s => {
+        const pts = [];
+        rango.forEach((f, i) => { const v = f.v[s.nombre]; if (v != null) pts.push({ x: i * pasoX, y: yEsc(v), v }); });
+        let suma = 0;
+        const total = pts.map(p => (suma += p.v));
+        const acum = [];
+        pts.forEach((p, k) => acum.push(k ? acum[k - 1] + segCurva(pts[k - 1], p) : `M ${p.x} ${p.y}`));
+        const area = lista.length === 1 ? el('path', { fill: s.color, opacity: 0.15 }) : null; // relleno solo con un vendedor
+        const path = el('path', { fill: 'none', stroke: s.color, 'stroke-width': 3 });
+        if (area) svg.append(area);
+        svg.append(path);
+        return { ...s, pts, total, acum, area, path };
     });
 
     const capa = el('g');
     svg.append(capa);
-    VDT.forEach((fila, i) => {
+    grupos = rango.map((f, i) => {
         const g = el('g', { class: 'mes-grupo' });
-        SERIES.forEach(s => {
-            const valor = valorVdt(fila, i, s.col);
+        series.forEach(s => {
+            const p = s.pts[i];
+            if (!p) return;
             const nodo = el('g', {
                 class: 'punto-vendedor-hover',
-                transform: `translate(${s.pts[i].x} ${s.pts[i].y})`,
-                'data-nombre': s.nombre, 'data-mes': fila[0], 'data-val': fmt2(valor)
+                transform: `translate(${p.x} ${p.y})`,
+                'data-nombre': s.nombre, 'data-mes': f.mes,
+                'data-val': fmt2(p.v) + (f.parcial ? ' (mes en curso)' : '')
             });
             nodo.append(
                 el('circle', { r: RADIO_PUNTO, fill: s.color, stroke: '#fff', 'stroke-width': 3 }),
@@ -559,73 +546,143 @@ function construirVdt() {
             );
             g.append(nodo);
         });
-        grupos.push(g);
         capa.append(g);
-        svg.append(el('text', { x: i * X_PASO, y: 445, class: 'axis-label', 'text-anchor': 'middle' }, fila[0]));
+        svg.append(el('text', { x: i * pasoX, y: 445, class: 'axis-label', 'text-anchor': 'middle' }, f.mes + (f.parcial ? '*' : '')));
+        return g;
     });
 
-    // Leyenda con el valor del mes que se está mostrando
-    $('#leyendaVdt').innerHTML = SERIES
-        .map(s => `<span><i style="--c:${s.color}"></i>${s.nombre} <b data-serie="${s.nombre}"></b></span>`).join('');
-    SERIES.forEach(s => { s.valorEl = $(`#leyendaVdt b[data-serie="${s.nombre}"]`); });
+    const notaEsc = $('#notaEscala');
+    if (notaEsc) notaEsc.textContent = [
+        partida ? 'Escala partida: bajo 500k cada marca vale 25k; sobre 500k, 200k.' : '',
+        rango.some(f => f.parcial) ? '*Mes en curso' : ''
+    ].filter(Boolean).join(' ');
 
-    timeline.max = N_VDT - 1;
-    conectarTooltip($('#contenedor-cronologia'), $('#tooltip-vdt'), '.punto-vendedor-hover',
-        n => `${n.getAttribute('data-nombre')} (${n.getAttribute('data-mes')}): ${n.getAttribute('data-val')}`);
+    if (timeline) timeline.max = N - 1;
+    pos = N - 1; // al abrir se ve la gráfica completa; ▶ la reproduce desde el inicio
+    idxVis = -1;
+    dibujar(pos);
+    actualizarControles();
 }
 
-// Dibuja el "cuadro" en la posición p (0 = primer mes, N-1 = último; admite decimales)
+// Dibuja el "cuadro" en la posición p (0 = primer mes del rango; admite decimales)
 function dibujar(p) {
-    const i = Math.min(Math.floor(p + 1e-6), N_VDT - 1);
-    const u = i < N_VDT - 1 ? Math.max(0, p - i) : 0;
-    SERIES.forEach(s => {
-        s.path.setAttribute('d', u > 0.001 ? s.acum[i] + tramoParcial(s.pts[i], s.pts[i + 1], u) : s.acum[i]);
+    const i = Math.min(Math.floor(p + 1e-6), rango.length - 1);
+    series.forEach(s => {
+        const ult = s.pts.length - 1, k = Math.min(i, ult);
+        const u = i < ult ? Math.max(0, p - i) : 0;
+        let d = s.acum[k], xf = s.pts[k].x;
+        if (u > 0.001) { const t = tramoParcial(s.pts[i], s.pts[i + 1], u); d += t.d; xf = t.x; }
+        s.path.setAttribute('d', d);
+        if (s.area) s.area.setAttribute('d', `${d} L ${xf} 417 L ${s.pts[0].x} 417 Z`);
     });
     if (i !== idxVis) { // solo cuando cambia el mes
         idxVis = i;
         grupos.forEach((g, j) => g.classList.toggle('visible', j <= i));
-        timelineLabel.textContent = VDT[i][0];
-        SERIES.forEach(s => { s.valorEl.textContent = fmt(s.total[i]); });
-        acumEl.textContent = `Acumulado por vendedor de ${VDT[0][0]} a ${VDT[i][0]}`;
+        if (timelineLabel) timelineLabel.textContent = rango[i].mes;
+        const cortos = series.filter(s => s.pts.length - 1 < i); // vendedores sin datos del mes actual
+        if (acumEl) acumEl.textContent = `Acumulado por vendedor de ${rango[0].mes} a ${rango[i].mes}` +
+            (cortos.length ? ` (${cortos.map(s => s.nombre).join(' y ')}: hasta ${rango[cortos[0].pts.length - 1].mes})` : '');
+        SERIES.forEach(s => {
+            const a = series.find(x => x.nombre === s.nombre);
+            if (chipVal[s.nombre]) chipVal[s.nombre].textContent = a ? fmt(a.total[Math.min(i, a.pts.length - 1)]) : '＋';
+        });
     }
-    timeline.value = p;
+    if (timeline) timeline.value = p;
 }
 
+function actualizarControles() {
+    $$('.segmentado button').forEach(b => b.classList.toggle('activo', b.dataset.periodo === periodo));
+    $$('.chip').forEach(c => {
+        const on = activos.has(c.dataset.nombre);
+        c.classList.toggle('off', !on);
+        c.setAttribute('aria-pressed', on);
+    });
+    const todos = activos.size === SERIES.length;
+    const btn = $('#btnComparar');
+    btn.classList.toggle('activo', todos);
+    btn.textContent = todos ? '✕ Quitar comparación' : '👥 Comparar con Carlos y Aarón';
+}
+
+function alternarSerie(nombre) {
+    if (activos.has(nombre)) {
+        if (activos.size === 1) return; // siempre debe quedar uno
+        activos.delete(nombre);
+    } else {
+        if (activos.size === 1 && activos.has('Javier')) periodo = 'todo'; // Carlos y Aarón traen datos desde 2025
+        activos.add(nombre);
+    }
+    construir();
+}
+
+function alternarComparacion() {
+    if (activos.size === SERIES.length) {
+        activos.clear();
+        activos.add('Javier');
+        periodo = '2026';
+    } else {
+        SERIES.forEach(s => activos.add(s.nombre));
+        periodo = 'todo';
+    }
+    construir();
+}
+
+/* ----- Reproducción tipo video ----- */
 function tick(t) {
     if (!jugando) return;
+    raf = requestAnimationFrame(tick); // primero: la animación no depende de que el dibujo salga bien
     const dt = Math.min(100, Math.max(0, t - ultimoT)); // evita saltos si la pestaña estuvo en segundo plano
     ultimoT = t;
-    pos = Math.min(N_VDT - 1, pos + dt / MS_POR_MES * vel);
-    dibujar(pos);
-    if (pos >= N_VDT - 1) pausar();
-    else raf = requestAnimationFrame(tick);
+    pos = Math.min(rango.length - 1, pos + dt / MS_POR_MES * vel);
+    try { dibujar(pos); } catch (e) { console.error('Error al dibujar la gráfica:', e); }
+    if (pos >= rango.length - 1) pausar(true); // pausar() cancela el cuadro ya programado
 }
 
-function pausar() {
+function pausar(fin = false) {
     jugando = false;
     cancelAnimationFrame(raf);
-    btnPlay.textContent = pos >= N_VDT - 1 ? '↺ Repetir' : '▶ Reproducir';
+    if (btnPlay) btnPlay.textContent = fin ? '↺ Repetir' : '▶ Reproducir';
 }
 
 function reproducir() {
-    if (pos >= N_VDT - 1) pos = 0;
+    if (pos >= rango.length - 1) pos = 0;
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { // sin animación: mostrar el resultado final
-        pos = N_VDT - 1;
+        pos = rango.length - 1;
         dibujar(pos);
-        pausar();
+        pausar(true);
         return;
     }
     jugando = true;
-    btnPlay.textContent = '⏸ Pausa';
+    if (btnPlay) btnPlay.textContent = '⏸ Pausa';
     ultimoT = performance.now();
     raf = requestAnimationFrame(tick);
 }
 
-btnPlay.addEventListener('click', () => (jugando ? pausar() : reproducir()));
-btnReset.addEventListener('click', () => { pausar(); pos = 0; reproducir(); });
-timeline.addEventListener('input', () => { pausar(); pos = +timeline.value; dibujar(pos); });
-selVel?.addEventListener('change', () => { vel = +selVel.value; });
-document.addEventListener('visibilitychange', () => { if (document.hidden && jugando) pausar(); });
+function iniciarTendencia() {
+    const criticos = ['#svgTendencia', '#contenedor-svg', '#tooltip-svg', '#btnPlay', '#btnReset', '#videoTimeline', '#leyendaVdt', '#btnComparar'];
+    const opcionales = ['#timelineLabel', '#acumVdt', '#notaEscala', '#velocidadVdt'];
+    const sin = lista => lista.filter(id => !$(id));
+    if (sin(opcionales).length) console.warn('index.html está desactualizado. Faltan: ' + sin(opcionales).join(', ') + '. Sube index.html, script.js y styles.css juntos.');
+    if (sin(criticos).length) { console.error('index.html está desactualizado. Faltan: ' + sin(criticos).join(', ')); return; }
+    construirLinea();
+    const leyenda = $('#leyendaVdt');
+    leyenda.innerHTML = SERIES.map(s =>
+        `<button type="button" class="chip" data-nombre="${s.nombre}" aria-pressed="false"><i style="--c:${s.color}"></i>${s.nombre} <b></b></button>`).join('');
+    SERIES.forEach(s => { chipVal[s.nombre] = $(`.chip[data-nombre="${s.nombre}"] b`, leyenda); });
+    leyenda.addEventListener('click', e => {
+        const c = e.target.closest('.chip');
+        if (c) alternarSerie(c.dataset.nombre);
+    });
+    $$('.segmentado button').forEach(b => b.addEventListener('click', () => { periodo = b.dataset.periodo; construir(); }));
+    $('#btnComparar').addEventListener('click', alternarComparacion);
+    btnPlay.addEventListener('click', () => (jugando ? pausar() : reproducir()));
+    btnReset.addEventListener('click', () => { pausar(); pos = 0; reproducir(); });
+    timeline.addEventListener('input', () => { pausar(); pos = +timeline.value; dibujar(pos); });
+    selVel?.addEventListener('change', () => { vel = +selVel.value; });
+    document.addEventListener('visibilitychange', () => { if (document.hidden && jugando) pausar(); });
+    conectarTooltip($('#contenedor-svg'), $('#tooltip-svg'), '.punto-vendedor-hover',
+        n => `${n.getAttribute('data-nombre')} (${n.getAttribute('data-mes')}): ${n.getAttribute('data-val')}`);
+    construir();
+}
 
 /* ===================== 8. Análisis dinámico ===================== */
 function iniciarAnalisis() {
@@ -696,19 +753,11 @@ function validarDatos() {
 }
 
 /* ===================== Arranque ===================== */
+const seguro = fn => { try { fn(); } catch (e) { console.error('Error al iniciar ' + (fn.name || 'una sección') + ':', e); } };
 if (datos.length) {
-    validarDatos();
-    pintarResumen();
-    dibujarTendencia();
-    pintarMayo();
-    dibujarBarras();
-    seleccionarMes(Math.min(4, ultimo));
-    iniciarAnalisis();
+    [validarDatos, pintarResumen, iniciarTendencia, pintarMayo, dibujarBarras,
+        () => seleccionarMes(Math.min(4, ultimo)), iniciarAnalisis].forEach(seguro);
 }
-iniciarCarruseles();
-iniciarComparativa();
-construirVdt();
-dibujar(0);
-activarTab($('.tab-button.active'));
+[iniciarCarruseles, iniciarComparativa, () => activarTab($('.tab-button.active'))].forEach(seguro);
 
 })();
