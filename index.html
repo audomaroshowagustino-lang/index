@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Ejecutivo de Ventas 2026 - Q.I. Javier Gutierrez</title>
-    <link rel="stylesheet" href="mejoras.css">
+    <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
 
@@ -13,13 +13,12 @@
 
     <div class="tabs" role="tablist">
         <button class="tab-button active" role="tab" aria-selected="true" aria-controls="anual" data-target="anual">1. Volumen Acumulado Anual</button>
-        <button class="tab-button" role="tab" aria-selected="false" aria-controls="mensual" data-target="mensual">2. Tendencia Mensual</button>
+        <button class="tab-button" role="tab" aria-selected="false" aria-controls="mensual" data-target="mensual">2. Tendencia y Comparativo</button>
         <button class="tab-button" role="tab" aria-selected="false" aria-controls="mayo" data-target="mayo">3. Desglose Mayo</button>
         <button class="tab-button" role="tab" aria-selected="false" aria-controls="top-mensual" data-target="top-mensual">4. Top Mensual</button>
         <button class="tab-button" role="tab" aria-selected="false" aria-controls="herramientas" data-target="herramientas">5. Herramientas</button>
         <button class="tab-button" role="tab" aria-selected="false" aria-controls="comparativos" data-target="comparativos">6. Comparativos</button>
-        <button class="tab-button" role="tab" aria-selected="false" aria-controls="vdt" data-target="vdt">7. Comparativo VDT</button>
-        <button class="tab-button" role="tab" aria-selected="false" aria-controls="analisis-dinamico" data-target="analisis-dinamico">8. Análisis Dinámico</button>
+        <button class="tab-button" role="tab" aria-selected="false" aria-controls="analisis-dinamico" data-target="analisis-dinamico">7. Análisis Dinámico</button>
     </div>
 
     <!-- 1. Volumen Acumulado Anual (todo se calcula desde el dataset) -->
@@ -37,17 +36,38 @@
         </div>
     </div>
 
-    <!-- 2. Tendencia Mensual -->
+    <!-- 2. Tendencia y Comparativo de vendedores -->
     <div id="mensual" class="tab-content" role="tabpanel">
-        <div class="titulo-seccion">Curva de Tendencia de Facturación</div>
-        <div class="svg-container" id="contenedor-svg">
-            <div id="tooltip-svg" class="tooltip-punto"></div>
-            <svg id="svgTendencia" viewBox="-40 0 860 290" role="img" aria-label="Facturación mensual"></svg>
+        <div class="titulo-seccion">Tendencia de Facturación y Comparativo de Vendedores</div>
+
+        <div class="tendencia-opciones">
+            <div class="segmentado" role="group" aria-label="Periodo">
+                <button type="button" data-periodo="2026" class="activo">2026</button>
+                <button type="button" data-periodo="todo">Desde Ago '25</button>
+            </div>
+            <button type="button" id="btnComparar">👥 Comparar con Carlos y Aarón</button>
         </div>
-        <p class="nota">*Mes en curso</p>
+
+        <div class="vdt-controles">
+            <button id="btnPlay" type="button">▶ Reproducir</button>
+            <button id="btnReset" type="button">🔄 Reiniciar</button>
+            <input type="range" id="videoTimeline" min="0" max="9" value="9" step="any" aria-label="Línea de tiempo">
+            <span id="timelineLabel"></span>
+            <select id="velocidadVdt" aria-label="Velocidad"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select>
+        </div>
+
+        <div class="svg-container svg-vdt" id="contenedor-svg">
+            <div id="tooltip-svg" class="tooltip-punto"></div>
+            <svg id="svgTendencia" viewBox="-85 85 1030 375" role="img" aria-label="Facturación mensual por vendedor"></svg>
+        </div>
+        <p class="nota" id="notaEscala"></p>
+        <p class="nota" id="acumVdt"></p>
+        <div class="leyenda-vdt" id="leyendaVdt"></div>
+        <p class="nota">Haz clic en un vendedor para sumarlo o quitarlo de la gráfica.</p>
     </div>
 
-    <!-- 3. Desglose Mayo -->
+    
+<!-- 3. Desglose Mayo -->
     <div id="mayo" class="tab-content" role="tabpanel">
         <div class="titulo-seccion">Facturación Atípica - Mayo 2026</div>
         <div class="chart-box">
@@ -188,26 +208,7 @@
         </div>
     </div>
 
-    <!-- 7. Comparativo VDT -->
-    <div id="vdt" class="tab-content" role="tabpanel">
-        <div class="titulo-seccion">Comparativo VDT: Evolución Cronológica (2025 vs 2026)</div>
-
-        <div class="vdt-controles">
-            <button id="btnPlay" type="button">▶ Reproducir</button>
-            <button id="btnReset" type="button">🔄 Reiniciar</button>
-            <input type="range" id="videoTimeline" min="0" max="13" value="0" step="1" aria-label="Línea de tiempo">
-            <span id="timelineLabel">Ago '25</span>
-        </div>
-
-        <div class="svg-container svg-vdt" id="contenedor-cronologia">
-            <div id="tooltip-vdt" class="tooltip-punto"></div>
-            <svg id="svgCronologia" viewBox="-85 0 945 460" role="img" aria-label="Evolución mensual por vendedor"></svg>
-        </div>
-        <p class="nota">Escala partida: bajo 500k cada marca vale 25k; sobre 500k cada marca vale 200k.</p>
-        <div class="leyenda-vdt" id="leyendaVdt"></div>
-    </div>
-
-    <!-- 8. Análisis Dinámico -->
+    <!-- 7. Análisis Dinámico -->
     <div id="analisis-dinamico" class="tab-content" role="tabpanel">
         <div class="titulo-seccion">Centro de Analítica y Filtrado Dinámico</div>
 
@@ -254,7 +255,6 @@
     </div>
 </div>
 
-<!-- datos.js define: const rawTransactions = [ ... ]; -->
-<script src="f.js"></script>
+<script src="script.js?v=3"></script>
 </body>
 </html>
