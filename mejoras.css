@@ -1,86 +1,39 @@
+/* ==========================================================
+   Dashboard Ejecutivo de Ventas 2026 - hoja de estilos completa
+   ========================================================== */
 
-body { 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    background-color: #f4f7f6; 
-    color: #333; 
-    margin: 0; 
-    padding: 20px; 
-    font-size: 18px;
-}
-.container { 
-    max-width: 1300px; 
-    margin: auto; 
-    background: #fff; 
-    padding: 40px; 
-    border-radius: 12px; 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
-    box-sizing: border-box;
-}
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; margin: 0; padding: 20px; font-size: 18px; }
+.container { max-width: 1300px; margin: auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); box-sizing: border-box; }
 h1 { text-align: center; color: #2c3e50; font-weight: 300; letter-spacing: 1px; margin-bottom: 40px; font-size: 40px;}
-
-/* Pestañas */
 .tabs { display: flex; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; border-bottom: 2px solid #ecf0f1; padding-bottom: 15px;}
-.tab-button { 
-    background: transparent; border: none; padding: 15px 25px; margin: 5px; 
-    cursor: pointer; border-radius: 5px; font-weight: bold; transition: 0.3s; 
-    font-size: 18px; 
-    color: #7f8c8d;
-}
+.tab-button { background: transparent; border: none; padding: 15px 25px; margin: 5px; cursor: pointer; border-radius: 5px; font-weight: bold; transition: 0.3s; font-size: 18px; color: #7f8c8d; }
 .tab-button:hover { color: #3498db; background: #f0f8ff; }
 .tab-button.active { background: #3498db; color: white; box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);}
-
 .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
 .tab-content.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Contenedores Genéricos */
 .chart-box { height: 450px; width: 100%; position: relative; margin-top: 30px; }
 .titulo-seccion { text-align: center; font-size: 28px; color: #34495e; margin-bottom: 30px; font-weight: 600;}
-
-/* === 1. Diseño Acumulado Anual === */
-.total-anual-container {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: linear-gradient(135deg, #2c3e50, #3498db); border-radius: 15px;
-    color: white; padding: 50px; margin-bottom: 40px; box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
-}
+.total-anual-container { display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #2c3e50, #3498db); border-radius: 15px; color: white; padding: 50px; margin-bottom: 40px; box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2); }
 .total-anual-container h2 { margin: 0; font-size: 24px; font-weight: 300; text-transform: uppercase; letter-spacing: 2px; opacity: 0.9;}
 .total-anual-container .monto-gigante { font-size: 90px; font-weight: bold; margin: 15px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);}
 .total-anual-container p { font-size: 20px; }
-
-/* Tarjetas */
 .summary-cards { display: flex; justify-content: space-around; margin-top: 30px; gap: 20px; }
-.card { 
-    background: #fff; padding: 30px; border-radius: 10px; text-align: center; 
-    flex: 1; border: 1px solid #eee; border-top: 6px solid #3498db; box-shadow: 0 4px 6px rgba(0,0,0,0.04); transition: 0.3s;
-}
+.card { background: #fff; padding: 30px; border-radius: 10px; text-align: center; flex: 1; border: 1px solid #eee; border-top: 6px solid #3498db; box-shadow: 0 4px 6px rgba(0,0,0,0.04); transition: 0.3s; }
 .card:hover { transform: translateY(-5px); box-shadow: 0 8px 12px rgba(0,0,0,0.08); }
 .card h3 { margin: 0 0 15px 0; color: #7f8c8d; font-size: 18px; text-transform: uppercase; font-weight: bold;}
 .card p { margin: 0; font-size: 36px; font-weight: bold; color: #2c3e50; }
-
-/* === 2. SVG Vectorial === */
 .svg-container { position: relative; width: 100%; height: 480px; padding-left: 65px; padding-right: 30px; box-sizing: border-box;}
 svg { width: 100%; height: 100%; overflow: visible; }
 .grid-line { stroke: #ecf0f1; stroke-width: 1.2; stroke-dasharray: 4,4; }
 .axis-label { font-size: 11px; fill: #95a5a6; font-weight: bold;}
 .linea-100k { stroke: #e74c3c; stroke-width: 3; stroke-dasharray: 8,6; opacity: 0.7;}
 .etiqueta-100k { fill: #e74c3c; font-size: 16px; font-weight: bold; }
-
 .punto-grafica { cursor: pointer; transition: 0.2s; }
 .punto-grafica:hover { r: 10; fill: #e74c3c; }
-.tooltip-punto { 
-    position: absolute; background: rgba(44, 62, 80, 0.95); color: white; padding: 10px 15px; 
-    border-radius: 6px; font-size: 18px; font-weight: bold; pointer-events: none; opacity: 0; transition: 0.2s;
-    transform: translate(-50%, -150%); z-index: 10;
-}
-
-/* === 3. Gráfico de Dona CSS === */
+.tooltip-punto { position: absolute; background: rgba(44, 62, 80, 0.95); color: white; padding: 10px 15px; border-radius: 6px; font-size: 18px; font-weight: bold; pointer-events: none; opacity: 0; transition: 0.2s; transform: translate(-50%, -150%); z-index: 10; }
 .donut-container { display: flex; justify-content: center; align-items: center; height: 100%; gap: 80px; }
-.donut-chart {
-    width: 350px; height: 350px; border-radius: 50%;
-    background: conic-gradient(#e74c3c 0% 73.67%, #bdc3c7 73.67% 100%);
-    display: flex; justify-content: center; align-items: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+.donut-chart { width: 350px; height: 350px; border-radius: 50%; background: conic-gradient(#e74c3c 0 var(--pct, 73.67%), #bdc3c7 0); display: flex; justify-content: center; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 .donut-hole { width: 190px; height: 190px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-direction: column;}
 .donut-hole span { font-size: 38px; font-weight: bold; color: #2c3e50;}
 .donut-hole small { font-size: 18px; color: #7f8c8d; text-transform: uppercase;}
@@ -88,8 +41,6 @@ svg { width: 100%; height: 100%; overflow: visible; }
 .legend-item { display: flex; align-items: center; font-weight: bold; font-size: 22px; color: #34495e;}
 .legend-sub { font-weight: normal; font-size: 18px; color: #7f8c8d; display: block; margin-top: 5px; }
 .color-box { width: 30px; height: 30px; border-radius: 6px; margin-right: 20px; flex-shrink: 0; }
-
-/* === 4. Gráfico Barras Interactivas === */
 .bars-container { display: flex; justify-content: space-between; align-items: flex-end; height: 350px; border-bottom: 3px solid #ecf0f1; padding-bottom: 5px; margin-top: 40px;}
 .bar-col { width: 8%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; height: 100%; cursor: pointer; position: relative;}
 .bar { width: 100%; background: #3498db; border-radius: 5px 5px 0 0; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -97,120 +48,43 @@ svg { width: 100%; height: 100%; overflow: visible; }
 .bar-label { margin-top: 15px; font-size: 18px; font-weight: bold; color: #7f8c8d; pointer-events: none;}
 .bar-tooltip { font-size: 16px; color: #2c3e50; font-weight: bold; margin-bottom: 8px; opacity: 0; transition: 0.3s; transform: translateY(10px); pointer-events: none;}
 .bar-col:hover .bar-tooltip, .bar-col.selected .bar-tooltip { opacity: 1; transform: translateY(0); }
-
 .instruccion { text-align: center; color: #d35400; font-size: 20px; font-weight: bold; background: #fdf2e9; padding: 18px; border-radius: 8px; margin-bottom: 30px; border-left: 6px solid #e67e22;}
-
-/* === Carruseles === */
-.carousel-wrapper {
-    position: relative; width: 100%; max-width: 900px; margin: 0 auto; 
-    overflow: hidden; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-    background: #111; 
-}
+.carousel-wrapper { position: relative; width: 100%; max-width: 900px; margin: 0 auto; overflow: hidden; border-radius: 12px; box-shadow: 0 6px 15px rgba(0,0,0,0.15); background: #111; }
 .carousel-track { display: flex; transition: transform 0.4s ease-in-out; }
 .carousel-slide { min-width: 100%; display: flex; justify-content: center; align-items: center; }
 .carousel-slide video, .carousel-slide img { width: 100%; height: auto; max-height: 550px; object-fit: contain; }
 .carousel-imagenes { background: #f4f7f6; border: 1px solid #ecf0f1; }
-
-.carousel-btn {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    background: rgba(44, 62, 80, 0.7); color: white; border: none;
-    width: 50px; height: 50px; cursor: pointer; font-size: 24px; border-radius: 50%;
-    z-index: 10; display: flex; justify-content: center; align-items: center;
-    transition: background 0.3s;
-}
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(44, 62, 80, 0.7); color: white; border: none; width: 50px; height: 50px; cursor: pointer; font-size: 24px; border-radius: 50%; z-index: 10; display: flex; justify-content: center; align-items: center; transition: background 0.3s; }
 .carousel-btn:hover { background: rgba(231, 76, 60, 0.9); }
-.prev-btn { left: 15px; }
-.next-btn { right: 15px; }
-
-/* === Tabla Comparativa Técnica === */
-.comparativa-container {
-    background: #ffffff; border-radius: 12px; padding: 30px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06); max-width: 1150px; margin: 20px auto;
-}
-.comp-header {
-    display: flex; justify-content: space-around; align-items: center;
-    background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 25px;
-    border-bottom: 3px solid #3498db;
-}
+.prev-btn { left: 15px; } .next-btn { right: 15px; }
+.comparativa-container { background: #ffffff; border-radius: 12px; padding: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); max-width: 1150px; margin: 20px auto; }
+.comp-header { display: flex; justify-content: space-around; align-items: center; background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-bottom: 3px solid #3498db; }
 .comp-logo-box { max-height: 90px; display: flex; align-items: center; }
 .comp-logo { max-height: 80px; width: auto; object-fit: contain; }
-.comp-vs-badge {
-    font-weight: bold; font-size: 22px; color: #e74c3c; background: #fff;
-    padding: 10px 18px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+.comp-vs-badge { font-weight: bold; font-size: 22px; color: #e74c3c; background: #fff; padding: 10px 18px; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 .comp-body { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
 .comp-producto { text-align: center; width: 28%; }
 .comp-lata-img img { width: 100%; max-width: 250px; height: auto; object-fit: contain; transition: transform 0.3s; }
 .comp-lata-img img:hover { transform: scale(1.03); }
 .comp-prod-nombre { margin-top: 15px; font-size: 22px; color: #2c3e50; letter-spacing: 1px; font-weight: bold; }
 .comp-tabla-wrapper { flex-grow: 1; display: flex; flex-direction: column; gap: 8px; }
-.comp-fila {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 14px; border-bottom: 1px solid #f1f1f1; font-size: 15px;
-    position: relative; cursor: pointer; transition: background-color 0.2s ease; flex-wrap: wrap;
-}
+.comp-fila { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid #f1f1f1; font-size: 15px; position: relative; cursor: pointer; transition: background-color 0.2s ease; flex-wrap: wrap; }
 .comp-fila:hover { background-color: #f4f6f7; border-radius: 6px; }
 .comp-propiedad { color: #34495e; font-weight: 600; text-align: center; flex-grow: 1; }
 .comp-valor-izq, .comp-valor-der { font-weight: bold; color: #2c3e50; width: 135px; text-align: center; position: relative; }
 .comp-fila.destaque { background-color: #fdfefe; border-bottom: 1px solid #eee; }
-
-.mejor-opcion {
-    background-color: #e8f8f5; color: #117a65 !important; border: 1px solid #a3e4d7;
-    border-radius: 6px; padding: 4px 6px; box-shadow: 0 2px 4px rgba(46, 204, 113, 0.1);
-}
-.badge-mejor {
-    font-size: 10px; background: #2ecc71; color: white; padding: 1px 4px;
-    border-radius: 4px; vertical-align: middle; margin-left: 4px; text-transform: uppercase;
-}
-
-.alerta-opcion {
-    background-color: #fef5e7; color: #b9770e !important; border: 1px solid #f8c471;
-    border-radius: 6px; padding: 4px 6px; box-shadow: 0 2px 4px rgba(243, 156, 18, 0.1);
-}
-.badge-alerta {
-    font-size: 10px; background: #f39c12; color: white; padding: 1px 4px;
-    border-radius: 4px; vertical-align: middle; margin-left: 4px; text-transform: uppercase;
-}
-
-.param-desc {
-    width: 100%; font-size: 13px; color: #7f8c8d; background: #f8f9fa;
-    padding: 6px 10px; border-left: 3px solid #3498db; border-radius: 0 4px 4px 0;
-    margin-top: 6px; display: none; animation: fadeInDesc 0.3s ease-in-out;
-}
+.mejor-opcion { background-color: #e8f8f5; color: #117a65 !important; border: 1px solid #a3e4d7; border-radius: 6px; padding: 4px 6px; box-shadow: 0 2px 4px rgba(46, 204, 113, 0.1); }
+.badge-mejor { font-size: 10px; background: #2ecc71; color: white; padding: 1px 4px; border-radius: 4px; vertical-align: middle; margin-left: 4px; text-transform: uppercase; }
+.alerta-opcion { background-color: #fef5e7; color: #b9770e !important; border: 1px solid #f8c471; border-radius: 6px; padding: 4px 6px; box-shadow: 0 2px 4px rgba(243, 156, 18, 0.1); }
+.badge-alerta { font-size: 10px; background: #f39c12; color: white; padding: 1px 4px; border-radius: 4px; vertical-align: middle; margin-left: 4px; text-transform: uppercase; }
+.param-desc { width: 100%; font-size: 13px; color: #7f8c8d; background: #f8f9fa; padding: 6px 10px; border-left: 3px solid #3498db; border-radius: 0 4px 4px 0; margin-top: 6px; display: none; animation: fadeInDesc 0.3s ease-in-out; }
 .comp-fila.activo .param-desc { display: block; }
 @keyframes fadeInDesc { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Estilos de la tabla de la Pestaña 8 */
 #tablaDinamicaBody tr:nth-child(even) { background-color: #f9fbfb; }
 #tablaDinamicaBody tr:hover { background-color: #edf2f7; transition: background 0.15s; }
 #tablaDinamicaBody td { padding: 12px 18px; border-bottom: 1px solid #f1f1f1; color: #2c3e50; }
 
-/* Media Queries Responsivas */
-@media (max-width: 1024px) {
-    .container { max-width: 95%; padding: 25px; }
-    .svg-container { height: 400px; }
-}
-@media (max-width: 768px) {
-    body { padding: 8px; font-size: 15px; }
-    .container { padding: 15px; }
-    h1 { font-size: 26px; margin-bottom: 20px; }
-    .tabs { flex-direction: column; gap: 8px; border-bottom: none; margin-bottom: 20px; }
-    .tab-button { width: 100%; margin: 0; padding: 10px; font-size: 15px; border: 1px solid #ecf0f1; }
-    .titulo-seccion { font-size: 20px; margin-bottom: 15px; }
-    .total-anual-container { padding: 25px 15px; margin-bottom: 20px; }
-    .total-anual-container .monto-gigante { font-size: 40px; }
-    .summary-cards { flex-direction: column; gap: 12px; }
-    .card { padding: 15px; }
-    .svg-container { height: 300px; padding-left: 35px; padding-right: 10px; }
-    .donut-container { flex-direction: column; gap: 20px; height: auto; }
-    .donut-chart { width: 200px; height: 200px; }
-    .donut-hole { width: 110px; height: 110px; }
-    .bars-container { height: 220px; }
-    .carousel-slide video, .carousel-slide img { max-height: 260px; }
-    .comp-body { flex-direction: column; }
-    .comp-producto { width: 100%; margin-bottom: 15px; }
-
-/* Se carga DESPUÉS de styles.css (o pégalo al final de ese archivo) */
+/* ----- Componentes agregados (pestañas 2 a 8) ----- */
 :focus-visible { outline: 3px solid #3498db; outline-offset: 2px; }
 .nota { text-align: center; color: #7f8c8d; font-size: 15px; margin: 20px 0 0; }
 .titulo-seccion.sep { margin-top: 50px; }
@@ -224,7 +98,6 @@ svg { width: 100%; height: 100%; overflow: visible; }
 .card.c-azul { border-top-color: #3498db; }
 
 /* Dona: el porcentaje lo calcula el JS */
-.donut-chart { background: conic-gradient(#e74c3c 0 var(--pct, 73.67%), #bdc3c7 0); }
 .color-box.rojo { background: #e74c3c; } .color-box.gris { background: #bdc3c7; }
 
 /* Barras como botones */
@@ -274,6 +147,19 @@ svg { width: 100%; height: 100%; overflow: visible; }
 .td-prod { color: #7f8c8d; font-size: 13px; max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #tablaDinamicaBody td.vacio { text-align: center; padding: 30px; color: #7f8c8d; font-weight: bold; }
 
+/* ----- Responsivo ----- */
+@media (max-width: 1024px) { .container { max-width: 95%; padding: 25px; } .svg-container { height: 400px; } }
+@media (max-width: 768px) {
+body { padding: 8px; font-size: 15px; } .container { padding: 15px; } h1 { font-size: 26px; margin-bottom: 20px; }
+.tabs { flex-direction: column; gap: 8px; border-bottom: none; margin-bottom: 20px; }
+.tab-button { width: 100%; margin: 0; padding: 10px; font-size: 15px; border: 1px solid #ecf0f1; }
+.titulo-seccion { font-size: 20px; margin-bottom: 15px; }
+.total-anual-container { padding: 25px 15px; margin-bottom: 20px; } .total-anual-container .monto-gigante { font-size: 40px; }
+.summary-cards { flex-direction: column; gap: 12px; } .card { padding: 15px; }
+.svg-container { height: 300px; padding-left: 35px; padding-right: 10px; }
+.donut-container { flex-direction: column; gap: 20px; height: auto; } .donut-chart { width: 200px; height: 200px; } .donut-hole { width: 110px; height: 110px; }
+.bars-container { height: 220px; } .carousel-slide video, .carousel-slide img { max-height: 260px; }
+.comp-body { flex-direction: column; } .comp-producto { width: 100%; margin-bottom: 15px; } }
 @media (max-width: 768px) {
     .vdt-controles { flex-wrap: wrap; }
     .leyenda-vdt { flex-wrap: wrap; gap: 20px; }
@@ -282,5 +168,4 @@ svg { width: 100%; height: 100%; overflow: visible; }
 @media (prefers-reduced-motion: reduce) {
     .tab-content, .param-desc { animation: none; }
     .carousel-track, .bar, .mes-grupo { transition: none; }
-}
 }
