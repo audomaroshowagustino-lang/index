@@ -481,7 +481,7 @@ function construirLinea() {
 }
 
 // Redibuja la gráfica completa según el periodo y los vendedores elegidos
-function construir() {
+function construir(animar = false) {
     pausar();
     const svg = $('#svgTendencia');
     svg.replaceChildren();
@@ -558,10 +558,11 @@ function construir() {
     ].filter(Boolean).join(' ');
 
     if (timeline) timeline.max = N - 1;
-    pos = N - 1; // al abrir se ve la gráfica completa; ▶ la reproduce desde el inicio
+    pos = animar ? 0 : N - 1; // al abrir se ve completa; al sumar vendedores arranca desde el inicio
     idxVis = -1;
     dibujar(pos);
     actualizarControles();
+    if (animar) reproducir();
 }
 
 // Dibuja el "cuadro" en la posición p (0 = primer mes del rango; admite decimales)
@@ -604,18 +605,21 @@ function actualizarControles() {
 }
 
 function alternarSerie(nombre) {
+    let suma = false;
     if (activos.has(nombre)) {
         if (activos.size === 1) return; // siempre debe quedar uno
         activos.delete(nombre);
     } else {
         if (activos.size === 1 && activos.has('Javier')) periodo = 'todo'; // Carlos y Aarón traen datos desde 2025
         activos.add(nombre);
+        suma = true;
     }
-    construir();
+    construir(suma); // al sumar un vendedor la gráfica se dibuja desde el principio
 }
 
 function alternarComparacion() {
-    if (activos.size === SERIES.length) {
+    const quita = activos.size === SERIES.length;
+    if (quita) {
         activos.clear();
         activos.add('Javier');
         periodo = '2026';
@@ -623,7 +627,7 @@ function alternarComparacion() {
         SERIES.forEach(s => activos.add(s.nombre));
         periodo = 'todo';
     }
-    construir();
+    construir(!quita); // al comparar arranca desde el principio; al quitar se muestra completa
 }
 
 /* ----- Reproducción tipo video ----- */
