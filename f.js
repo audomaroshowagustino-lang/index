@@ -1,4 +1,5 @@
 /* ===== DATOS: tu dataset verificado (208 registros) ===== */
+/* ===== DATOS: tu dataset verificado (208 registros) ===== */
 const rawTransactions = [
     { id: 1, fecha: "06 ENE 26", mes: "ENERO", cotizacion: "220 - 8159", factura: "FICCXX - 4639", cuenta: "ADSA", monto: 1865.28, montoSinIva: 1608.0, producto: "(2-PRAKTICA)" },
     { id: 2, fecha: "12 ENE 26", mes: "ENERO", cotizacion: "220 - 8216", factura: "FICCXX - 4667", cuenta: "ADSA", monto: 6936.94, montoSinIva: 5980.12, producto: "(2-ENDURENCE)(2-IMPER3AÑ0S)" },
@@ -279,12 +280,13 @@ function el(tag, attrs = {}, texto) {
 }
 
 // Curva suave sin sobreimpulso
+const segCurva = (a, b) => {
+    const mx = (a.x + b.x) / 2;
+    return ` C ${mx} ${a.y}, ${mx} ${b.y}, ${b.x} ${b.y}`;
+};
 function curva(p) {
     let d = `M ${p[0].x} ${p[0].y}`;
-    for (let i = 1; i < p.length; i++) {
-        const mx = (p[i - 1].x + p[i].x) / 2;
-        d += ` C ${mx} ${p[i - 1].y}, ${mx} ${p[i].y}, ${p[i].x} ${p[i].y}`;
-    }
+    for (let i = 1; i < p.length; i++) d += segCurva(p[i - 1], p[i]);
     return d;
 }
 
@@ -323,13 +325,17 @@ const etiquetaMes = i => MESES[i] + (i === ultimo ? '*' : '');
 
 /* ===================== Estado VDT ===================== */
 const X_PASO = 65;
-let paso = 0;
-let timer = null;
+const RADIO_PUNTO = 22; // tamaño de los círculos / fotos de cada vendedor (px)
+const MS_POR_MES = 700; // duración de cada mes a velocidad 1x
+const N_VDT = VDT.length;
+let pos = 0, jugando = false, raf = 0, ultimoT = 0, vel = 1, idxVis = -1;
 const grupos = [];
 const btnPlay = $('#btnPlay');
 const btnReset = $('#btnReset');
 const timeline = $('#videoTimeline');
 const timelineLabel = $('#timelineLabel');
+const selVel = $('#velocidadVdt');
+const acumEl = $('#acumVdt');
 
 /* ===================== Pestañas ===================== */
 const tabs = $$('.tab-button');
@@ -485,7 +491,7 @@ function iniciarComparativa() {
     });
 }
 
-/* ===================== 7. Cronología VDT ===================== */
+/* ===================== 7. Cronología VDT (se reproduce como un video) ===================== */
 // Escala partida: bajo 500k, 25k = 15 px; sobre 500k, 200k = 21 px
 function yVdt(v) {
     if (v <= 500000) return 417 - (v / 500000) * 300;
@@ -494,11 +500,25 @@ function yVdt(v) {
 const etiquetaEje = v => v >= 1e6 ? (v / 1e6) + 'M' : v ? (v / 1e3) + 'k' : '0';
 const valorVdt = (fila, i, col) => fila[col] ?? totales[i - 5] ?? 0; // Javier 2026 = dataset
 
+const lerp = (a, b, u) => ({ x: a.x + (b.x - a.x) * u, y: a.y + (b.y - a.y) * u });
+
+// Tramo de curva entre a y b recortado a la fracción u (algoritmo de De Casteljau)
+function tramoParcial(a, b, u) {
+    const mx = (a.x + b.x) / 2;
+    const c1 = { x: mx, y: a.y }, c2 = { x: mx, y: b.y };
+    const p = lerp(a, c1, u), q = lerp(c1, c2, u), r = lerp(c2, b, u);
+    const s = lerp(p, q, u), t = lerp(q, r, u), f = lerp(s, t, u);
+    return ` C ${p.x} ${p.y}, ${s.x} ${s.y}, ${f.x} ${f.y}`;
+}
+
 function construirVdt() {
     const svg = $('#svgCronologia');
+
+    const defs = el('defs');
     const clip = el('clipPath', { id: 'recorte-foto' });
-    clip.append(el('circle', { r: 12 }));
-    svg.append(el('defs')).append(clip);
+    clip.append(el('circle', { r: RADIO_PUNTO - 2 }));
+    defs.append(clip);
+    svg.append(defs);
 
     const marcas = [1.5e6, 1.3e6, 1.1e6, 9e5, 7e5, 5e5];
     for (let v = 475e3; v >= 0; v -= 25e3) marcas.push(v);
@@ -511,8 +531,14 @@ function construirVdt() {
         );
     });
 
+    // Puntos y curva acumulada de cada vendedor: se calculan UNA vez, no en cada cuadro
     SERIES.forEach(s => {
-        s.path = el('path', { fill: 'none', stroke: s.color, 'stroke-width': 3 });
+        s.pts = VDT.map((fila, i) => ({ x: i * X_PASO, y: yVdt(valorVdt(fila, i, s.col)) }));
+        let suma = 0; // acumulado desde el primer mes de la gráfica
+        s.total = VDT.map((fila, i) => (suma += valorVdt(fila, i, s.col)));
+        s.acum = [];
+        s.pts.forEach((p, i) => s.acum.push(i ? s.acum[i - 1] + segCurva(s.pts[i - 1], p) : `M ${p.x} ${p.y}`));
+        s.path = el('path', { fill: 'none', stroke: s.color, 'stroke-width': 3, d: s.acum[0] });
         svg.append(s.path);
     });
 
@@ -524,12 +550,12 @@ function construirVdt() {
             const valor = valorVdt(fila, i, s.col);
             const nodo = el('g', {
                 class: 'punto-vendedor-hover',
-                transform: `translate(${i * X_PASO} ${yVdt(valor)})`,
+                transform: `translate(${s.pts[i].x} ${s.pts[i].y})`,
                 'data-nombre': s.nombre, 'data-mes': fila[0], 'data-val': fmt2(valor)
             });
             nodo.append(
-                el('circle', { r: 14, fill: s.color, stroke: '#fff', 'stroke-width': 2.5 }),
-                el('image', { href: s.foto, x: -12, y: -12, width: 24, height: 24, preserveAspectRatio: 'xMidYMid slice', 'clip-path': 'url(#recorte-foto)' })
+                el('circle', { r: RADIO_PUNTO, fill: s.color, stroke: '#fff', 'stroke-width': 3 }),
+                el('image', { href: s.foto, x: -(RADIO_PUNTO - 2), y: -(RADIO_PUNTO - 2), width: (RADIO_PUNTO - 2) * 2, height: (RADIO_PUNTO - 2) * 2, preserveAspectRatio: 'xMidYMid slice', 'clip-path': 'url(#recorte-foto)' })
             );
             g.append(nodo);
         });
@@ -538,34 +564,68 @@ function construirVdt() {
         svg.append(el('text', { x: i * X_PASO, y: 445, class: 'axis-label', 'text-anchor': 'middle' }, fila[0]));
     });
 
-    $('#leyendaVdt').innerHTML = SERIES.map(s => `<span><i style="--c:${s.color}"></i>${s.nombre}</span>`).join('');
+    // Leyenda con el valor del mes que se está mostrando
+    $('#leyendaVdt').innerHTML = SERIES
+        .map(s => `<span><i style="--c:${s.color}"></i>${s.nombre} <b data-serie="${s.nombre}"></b></span>`).join('');
+    SERIES.forEach(s => { s.valorEl = $(`#leyendaVdt b[data-serie="${s.nombre}"]`); });
+
+    timeline.max = N_VDT - 1;
     conectarTooltip($('#contenedor-cronologia'), $('#tooltip-vdt'), '.punto-vendedor-hover',
         n => `${n.getAttribute('data-nombre')} (${n.getAttribute('data-mes')}): ${n.getAttribute('data-val')}`);
 }
 
-function renderizarPaso(hasta) {
-    grupos.forEach((g, i) => g.classList.toggle('visible', i <= hasta));
+// Dibuja el "cuadro" en la posición p (0 = primer mes, N-1 = último; admite decimales)
+function dibujar(p) {
+    const i = Math.min(Math.floor(p + 1e-6), N_VDT - 1);
+    const u = i < N_VDT - 1 ? Math.max(0, p - i) : 0;
     SERIES.forEach(s => {
-        const pts = VDT.slice(0, hasta + 1).map((f, i) => ({ x: i * X_PASO, y: yVdt(valorVdt(f, i, s.col)) }));
-        s.path.setAttribute('d', pts.length > 1 ? curva(pts) : '');
+        s.path.setAttribute('d', u > 0.001 ? s.acum[i] + tramoParcial(s.pts[i], s.pts[i + 1], u) : s.acum[i]);
     });
-    timeline.value = hasta;
-    timelineLabel.textContent = VDT[hasta][0];
+    if (i !== idxVis) { // solo cuando cambia el mes
+        idxVis = i;
+        grupos.forEach((g, j) => g.classList.toggle('visible', j <= i));
+        timelineLabel.textContent = VDT[i][0];
+        SERIES.forEach(s => { s.valorEl.textContent = fmt(s.total[i]); });
+        acumEl.textContent = `Acumulado por vendedor de ${VDT[0][0]} a ${VDT[i][0]}`;
+    }
+    timeline.value = p;
 }
+
+function tick(t) {
+    if (!jugando) return;
+    const dt = Math.min(100, Math.max(0, t - ultimoT)); // evita saltos si la pestaña estuvo en segundo plano
+    ultimoT = t;
+    pos = Math.min(N_VDT - 1, pos + dt / MS_POR_MES * vel);
+    dibujar(pos);
+    if (pos >= N_VDT - 1) pausar();
+    else raf = requestAnimationFrame(tick);
+}
+
 function pausar() {
-    clearInterval(timer);
-    timer = null;
-    btnPlay.textContent = '▶ Reproducir';
+    jugando = false;
+    cancelAnimationFrame(raf);
+    btnPlay.textContent = pos >= N_VDT - 1 ? '↺ Repetir' : '▶ Reproducir';
 }
+
 function reproducir() {
-    if (paso >= VDT.length - 1) paso = 0;
+    if (pos >= N_VDT - 1) pos = 0;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { // sin animación: mostrar el resultado final
+        pos = N_VDT - 1;
+        dibujar(pos);
+        pausar();
+        return;
+    }
+    jugando = true;
     btnPlay.textContent = '⏸ Pausa';
-    renderizarPaso(paso);
-    timer = setInterval(() => (paso < VDT.length - 1 ? renderizarPaso(++paso) : pausar()), 700);
+    ultimoT = performance.now();
+    raf = requestAnimationFrame(tick);
 }
-btnPlay.addEventListener('click', () => (timer ? pausar() : reproducir()));
-btnReset.addEventListener('click', () => { pausar(); paso = 0; reproducir(); });
-timeline.addEventListener('input', () => { pausar(); paso = +timeline.value; renderizarPaso(paso); });
+
+btnPlay.addEventListener('click', () => (jugando ? pausar() : reproducir()));
+btnReset.addEventListener('click', () => { pausar(); pos = 0; reproducir(); });
+timeline.addEventListener('input', () => { pausar(); pos = +timeline.value; dibujar(pos); });
+selVel?.addEventListener('change', () => { vel = +selVel.value; });
+document.addEventListener('visibilitychange', () => { if (document.hidden && jugando) pausar(); });
 
 /* ===================== 8. Análisis dinámico ===================== */
 function iniciarAnalisis() {
@@ -648,7 +708,7 @@ if (datos.length) {
 iniciarCarruseles();
 iniciarComparativa();
 construirVdt();
-renderizarPaso(0);
+dibujar(0);
 activarTab($('.tab-button.active'));
 
 })();
