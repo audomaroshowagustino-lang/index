@@ -1,0 +1,73 @@
+/* Se carga DESPUÉS de styles.css (o pégalo al final de ese archivo) */
+:focus-visible { outline: 3px solid #3498db; outline-offset: 2px; }
+.nota { text-align: center; color: #7f8c8d; font-size: 15px; margin: 20px 0 0; }
+.titulo-seccion.sep { margin-top: 50px; }
+.total-anual-container .sub { margin: 0; opacity: 0.8; }
+.carousel-imagenes { margin-bottom: 40px; }
+.carousel-track { touch-action: pan-y; }
+
+/* Colores de tarjetas (antes estilos en línea) */
+.card.c-verde { border-top-color: #2ecc71; } .card.c-amarillo { border-top-color: #f1c40f; }
+.card.c-morado { border-top-color: #9b59b6; } .card.c-rojo { border-top-color: #e74c3c; }
+.card.c-azul { border-top-color: #3498db; }
+
+/* Dona: el porcentaje lo calcula el JS */
+.donut-chart { background: conic-gradient(#e74c3c 0 var(--pct, 73.67%), #bdc3c7 0); }
+.color-box.rojo { background: #e74c3c; } .color-box.gris { background: #bdc3c7; }
+
+/* Barras como botones */
+.bar-col { background: none; border: 0; padding: 0; font: inherit; color: inherit; }
+
+/* SVG */
+.axis-base { stroke: #bdc3c7; stroke-width: 2; }
+.linea-meta { stroke: #e74c3c; stroke-width: 1.5; stroke-dasharray: 4,4; }
+.axis-label.meta { fill: #e74c3c; }
+.grid-line.fino { stroke-dasharray: 2,2; }
+
+/* Tabla comparativa: hover solo en equipos con ratón; en táctil se usa clic */
+@media (hover: hover) { .comp-fila:hover .param-desc { display: block; } }
+
+/* VDT */
+.vdt-controles { display: flex; align-items: center; justify-content: center; gap: 15px; max-width: 900px; margin: 0 auto 25px; background: #2c3e50; padding: 12px 20px; border-radius: 8px; }
+.vdt-controles button { border: none; color: #fff; padding: 8px 18px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 15px; min-width: 110px; }
+#btnPlay { background: #2ecc71; } #btnReset { background: #e74c3c; }
+#videoTimeline { flex: 1; cursor: pointer; accent-color: #3498db; height: 6px; margin-left: 10px; }
+#timelineLabel { color: #fff; font-size: 14px; font-weight: bold; min-width: 85px; text-align: right; }
+.svg-vdt { height: 520px; }
+.mes-grupo { opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.mes-grupo.visible { opacity: 1; pointer-events: auto; }
+.punto-vendedor-hover { cursor: pointer; }
+.leyenda-vdt { display: flex; justify-content: center; gap: 40px; margin-top: 30px; font-weight: bold; color: #34495e; }
+.leyenda-vdt span { display: flex; align-items: center; gap: 8px; }
+.leyenda-vdt i { width: 15px; height: 15px; border-radius: 50%; background: var(--c); }
+
+/* Pestaña 8 */
+.filtros { background: #2c3e50; padding: 25px; border-radius: 12px; margin-bottom: 30px; display: flex; flex-wrap: wrap; gap: 20px; }
+.filtro { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 220px; }
+.filtro label { color: #bdc3c7; font-size: 14px; font-weight: bold; text-transform: uppercase; }
+.filtro select, .filtro input { padding: 12px; border-radius: 8px; border: 0; font-size: 16px; background: #fff; color: #2c3e50; }
+.filtro select { font-weight: bold; cursor: pointer; }
+.kpis { margin-bottom: 35px; }
+.tabla-panel { background: #fff; border-radius: 12px; border: 1px solid #ecf0f1; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
+.tabla-cab { background: #f8f9fa; padding: 18px 25px; border-bottom: 1px solid #ecf0f1; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.tabla-cab h3 { margin: 0; font-size: 18px; color: #2c3e50; }
+.tabla-cab span { font-size: 14px; color: #7f8c8d; font-weight: bold; }
+.tabla-scroll { max-height: 450px; overflow: auto; }
+.tabla-scroll table { width: 100%; border-collapse: collapse; text-align: left; font-size: 15px; }
+.tabla-scroll thead { background: #34495e; color: #fff; position: sticky; top: 0; z-index: 2; }
+.tabla-scroll th { padding: 14px 18px; white-space: nowrap; }
+.num { text-align: right; } .mono { font-family: monospace; } .fuerte { font-weight: bold; }
+.id-col { color: #7f8c8d; } .verde { color: #27ae60; font-weight: bold; }
+.badge-mes { background: #ebf5fb; color: #2980b9; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+.td-prod { color: #7f8c8d; font-size: 13px; max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#tablaDinamicaBody td.vacio { text-align: center; padding: 30px; color: #7f8c8d; font-weight: bold; }
+
+@media (max-width: 768px) {
+    .vdt-controles { flex-wrap: wrap; }
+    .leyenda-vdt { flex-wrap: wrap; gap: 20px; }
+    .svg-vdt { height: 360px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .tab-content, .param-desc { animation: none; }
+    .carousel-track, .bar, .mes-grupo { transition: none; }
+}

@@ -1,230 +1,130 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Ejecutivo de Ventas 2026 - Q.I Javier Gutierrez</title>
-    <!-- Enlace a la Hoja de Estilos Externa -->
-    <link rel="stylesheet" href="formato.css">
+    <title>Dashboard Ejecutivo de Ventas 2026 - Q.I. Javier Gutierrez</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mejoras.css">
 </head>
 <body>
 
 <div class="container">
     <h1>Dashboard Ejecutivo de Ventas 2026 - Q.I. Javier Gutierrez</h1>
-    
-    <div class="tabs">
-        <button class="tab-button active" data-target="anual">1. Volumen Acumulado Anual</button>
-        <button class="tab-button" data-target="mensual">2. Tendencia Mensual</button>
-        <button class="tab-button" data-target="mayo">3. Desglose Mayo</button>
-        <button class="tab-button" data-target="top-mensual">4. Top Mensual</button>
-        <button class="tab-button" data-target="herramientas">5. Herramientas</button>
-        <button class="tab-button" data-target="comparativos">6. Comparativos</button>
-        <button class="tab-button" data-target="vdt">7. Comparativo VDT</button>
+
+    <div class="tabs" role="tablist">
+        <button class="tab-button active" role="tab" aria-selected="true" aria-controls="anual" data-target="anual">1. Volumen Acumulado Anual</button>
+        <button class="tab-button" role="tab" aria-selected="false" aria-controls="mensual" data-target="mensual">2. Tendencia Mensual</button>
+        <button class="tab-button" role="tab" aria-selected="false" aria-controls="mayo" data-target="mayo">3. Desglose Mayo</button>
+        <button class="tab-button" role="tab" aria-selected="false" aria-controls="top-mensual" data-target="top-mensual">4. Top Mensual</button>
+        <button class="tab-button" role="tab" aria-selected="false" aria-controls="herramientas" data-target="herramientas">5. Herramientas</button>
+        <button class="tab-button" role="tab" aria-selected="false" aria-controls="comparativos" data-target="comparativos">6. Comparativos</button>
+        <button class="tab-button" role="tab" aria-selected="false" aria-controls="vdt" data-target="vdt">7. Comparativo VDT</button>
+        <button class="tab-button" role="tab" aria-selected="false" aria-controls="analisis-dinamico" data-target="analisis-dinamico">8. Análisis Dinámico</button>
     </div>
 
-    <!-- 1. Volumen Acumulado Anual -->
-    <div id="anual" class="tab-content active">
+    <!-- 1. Volumen Acumulado Anual (todo se calcula desde el dataset) -->
+    <div id="anual" class="tab-content active" role="tabpanel">
         <div class="total-anual-container">
             <h2>Volumen Facturado Acumulado (Sin IVA)</h2>
-            <div class="monto-gigante">$1,779,287</div>
-            <p style="margin:0; opacity:0.8;">Total consolidado de Enero a Octubre 2026</p>
+            <div class="monto-gigante" id="montoAnual">$0</div>
+            <p class="sub" id="rangoAnual"></p>
         </div>
-        
-        <div class="titulo-seccion">Top 3 Clientes del A&ntilde;o</div>
+        <div class="titulo-seccion">Top 3 Clientes del Año</div>
         <div class="summary-cards">
-            <div class="card" style="border-top-color: #2ecc71;">
-                <h3>1. BONATTI</h3>
-                <p>$495,271</p>
-            </div>
-            <div class="card" style="border-top-color: #f1c40f;">
-                <h3>2. KEK&Eacute;N</h3>
-                <p>$272,149</p>
-            </div>
-            <div class="card" style="border-top-color: #9b59b6;">
-                <h3>3. CORROSION MASTER</h3>
-                <p>$125,965</p>
-            </div>
+            <div class="card c-verde"><h3 id="anual-c1-nombre"></h3><p id="anual-c1-monto"></p></div>
+            <div class="card c-amarillo"><h3 id="anual-c2-nombre"></h3><p id="anual-c2-monto"></p></div>
+            <div class="card c-morado"><h3 id="anual-c3-nombre"></h3><p id="anual-c3-monto"></p></div>
         </div>
     </div>
 
-    <!-- 2. Tendencia Mensual (Curva y Ejes) -->
-    <div id="mensual" class="tab-content">
-        <div class="titulo-seccion">Curva de Tendencia de Facturaci&oacute;n</div>
+    <!-- 2. Tendencia Mensual -->
+    <div id="mensual" class="tab-content" role="tabpanel">
+        <div class="titulo-seccion">Curva de Tendencia de Facturación</div>
         <div class="svg-container" id="contenedor-svg">
             <div id="tooltip-svg" class="tooltip-punto"></div>
-            
-            <svg viewBox="-40 0 860 290">
-                <text x="-15" y="32" class="axis-label" text-anchor="end">400k</text>
-                <line x1="0" y1="27.7" x2="800" y2="27.7" class="grid-line" />
-                
-                <text x="-15" y="88" class="axis-label" text-anchor="end">300k</text>
-                <line x1="0" y1="83.3" x2="800" y2="83.3" class="grid-line" />
-                
-                <text x="-15" y="143" class="axis-label" text-anchor="end">200k</text>
-                <line x1="0" y1="138.8" x2="800" y2="138.8" class="grid-line" />
-                
-                <text x="-15" y="198" class="etiqueta-100k" text-anchor="end">100k</text>
-                <line x1="0" y1="194.4" x2="800" y2="194.4" class="linea-100k" />
-                <text x="810" y="198" class="etiqueta-100k" text-anchor="start">Meta Base</text>
-
-                <text x="-15" y="254" class="axis-label" text-anchor="end">0</text>
-                <line x1="0" y1="250" x2="800" y2="250" stroke="#bdc3c7" stroke-width="2" />
-                
-                <path d="M 0,250 L 0,232.5 C 44.4,232.5 44.4,94.1 88.8,94.1 C 133.3,94.1 133.3,189.6 177.7,189.6 C 222.2,189.6 222.2,213.3 266.6,213.3 C 311.1,213.3 311.1,10.3 355.5,10.3 C 400,10.3 400,170.3 444.4,170.3 C 488.8,170.3 488.8,16.1 533.3,16.1 C 577.7,16.1 577.7,177.2 622.2,177.2 C 666.6,177.2 666.6,161 711.1,161 C 755.5,161 755.5,246.4 800,246.4 L 800,250 Z" fill="rgba(52, 152, 219, 0.15)"/>
-                
-                <path d="M 0,232.5 C 44.4,232.5 44.4,94.1 88.8,94.1 C 133.3,94.1 133.3,189.6 177.7,189.6 C 222.2,189.6 222.2,213.3 266.6,213.3 C 311.1,213.3 311.1,10.3 355.5,10.3 C 400,10.3 400,170.3 444.4,170.3 C 488.8,170.3 488.8,16.1 533.3,16.1 C 577.7,16.1 577.7,177.2 622.2,177.2 C 666.6,177.2 666.6,161 711.1,161 C 755.5,161 755.5,246.4 800,246.4" fill="none" stroke="#2980b9" stroke-width="4"/>
-
-                <circle cx="0" cy="232.5" r="7" fill="#3498db" class="punto-grafica" data-val="$31,356" />
-                <text x="0" y="275" class="axis-label" text-anchor="middle">Ene</text>
-                
-                <circle cx="88.8" cy="94.1" r="7" fill="#3498db" class="punto-grafica" data-val="$280,545" />
-                <text x="88.8" y="275" class="axis-label" text-anchor="middle">Feb</text>
-                
-                <circle cx="177.7" cy="189.6" r="7" fill="#3498db" class="punto-grafica" data-val="$108,562" />
-                <text x="177.7" y="275" class="axis-label" text-anchor="middle">Mar</text>
-                
-                <circle cx="266.6" cy="213.3" r="7" fill="#3498db" class="punto-grafica" data-val="$65,894" />
-                <text x="266.6" y="275" class="axis-label" text-anchor="middle">Abr</text>
-                
-                <circle cx="355.5" cy="10.3" r="7" fill="#3498db" class="punto-grafica" data-val="$431,330" />
-                <text x="355.5" y="275" class="axis-label" text-anchor="middle">May</text>
-                
-                <circle cx="444.4" cy="170.3" r="7" fill="#3498db" class="punto-grafica" data-val="$143,330" />
-                <text x="444.4" y="275" class="axis-label" text-anchor="middle">Jun</text>
-                
-                <circle cx="533.3" cy="16.1" r="7" fill="#3498db" class="punto-grafica" data-val="$420,863" />
-                <text x="533.3" y="275" class="axis-label" text-anchor="middle">Jul</text>
-                
-                <circle cx="622.2" cy="177.2" r="7" fill="#3498db" class="punto-grafica" data-val="$130,957" />
-                <text x="622.2" y="275" class="axis-label" text-anchor="middle">Ago</text>
-                
-                <circle cx="711.1" cy="161.0" r="7" fill="#3498db" class="punto-grafica" data-val="$154,493" />
-                <text x="711.1" y="275" class="axis-label" text-anchor="middle">Sep</text>
-                
-                <circle cx="800" cy="246.4" r="7" fill="#3498db" class="punto-grafica" data-val="$32,315" />
-                <text x="800" y="275" class="axis-label" text-anchor="middle">Oct</text>
-            </svg>
+            <svg id="svgTendencia" viewBox="-40 0 860 290" role="img" aria-label="Facturación mensual"></svg>
         </div>
+        <p class="nota">*Mes en curso</p>
     </div>
 
     <!-- 3. Desglose Mayo -->
-    <div id="mayo" class="tab-content">
-        <div class="titulo-seccion">Facturaci&oacute;n At&iacute;pica - Mayo 2026</div>
+    <div id="mayo" class="tab-content" role="tabpanel">
+        <div class="titulo-seccion">Facturación Atípica - Mayo 2026</div>
         <div class="chart-box">
             <div class="donut-container">
                 <div class="donut-chart">
                     <div class="donut-hole">
-                        <span>$431k</span>
+                        <span id="mayoTotal">$0</span>
                         <small>Total Mayo</small>
                     </div>
                 </div>
                 <div class="legend">
                     <div class="legend-item">
-                        <div class="color-box" style="background:#e74c3c;"></div>
-                        <div>
-                            Grupo (Kek&eacute;n, Xcanat&uacute;n, SIT)
-                            <span class="legend-sub">$317,741 (73.7%)</span>
-                        </div>
+                        <div class="color-box rojo"></div>
+                        <div>Grupo (Kekén, Xcanatún, SIT)<span class="legend-sub" id="mayoGrupo"></span></div>
                     </div>
                     <div class="legend-item">
-                        <div class="color-box" style="background:#bdc3c7;"></div>
-                        <div>
-                            Resto del Mes
-                            <span class="legend-sub">$113,589 (26.3%)</span>
-                        </div>
+                        <div class="color-box gris"></div>
+                        <div>Resto del Mes<span class="legend-sub" id="mayoResto"></span></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 4. Top Mensual Interactivo -->
-    <div id="top-mensual" class="tab-content">
+    <!-- 4. Top Mensual -->
+    <div id="top-mensual" class="tab-content" role="tabpanel">
         <p class="instruccion">&#9432; Selecciona la barra de cualquier mes para visualizar a sus 3 principales clientes.</p>
-        
-        <div class="bars-container">
-            <div class="bar-col" data-index="0" data-mes="Ene"><div class="bar-tooltip">$31k</div><div class="bar" style="height: 6.97%;"></div><div class="bar-label">Ene</div></div>
-            <div class="bar-col" data-index="1" data-mes="Feb"><div class="bar-tooltip">$280k</div><div class="bar" style="height: 62.34%;"></div><div class="bar-label">Feb</div></div>
-            <div class="bar-col" data-index="2" data-mes="Mar"><div class="bar-tooltip">$108k</div><div class="bar" style="height: 24.12%;"></div><div class="bar-label">Mar</div></div>
-            <div class="bar-col" data-index="3" data-mes="Abr"><div class="bar-tooltip">$65k</div><div class="bar" style="height: 14.64%;"></div><div class="bar-label">Abr</div></div>
-            <div class="bar-col selected" data-index="4" data-mes="May"><div class="bar-tooltip">$431k</div><div class="bar" style="height: 95.85%; background:#e74c3c;"></div><div class="bar-label">May</div></div>
-            <div class="bar-col" data-index="5" data-mes="Jun"><div class="bar-tooltip">$143k</div><div class="bar" style="height: 31.85%;"></div><div class="bar-label">Jun</div></div>
-            <div class="bar-col" data-index="6" data-mes="Jul"><div class="bar-tooltip">$420k</div><div class="bar" style="height: 93.53%;"></div><div class="bar-label">Jul</div></div>
-            <div class="bar-col" data-index="7" data-mes="Ago"><div class="bar-tooltip">$130k</div><div class="bar" style="height: 29.10%;"></div><div class="bar-label">Ago</div></div>
-            <div class="bar-col" data-index="8" data-mes="Sep"><div class="bar-tooltip">$154k</div><div class="bar" style="height: 35.57%;"></div><div class="bar-label">Sep</div></div>
-            <div class="bar-col" data-index="9" data-mes="Oct"><div class="bar-tooltip">$32k</div><div class="bar" style="height: 1.42%;"></div><div class="bar-label">Oct</div></div>
-        </div>
-        
-        <div class="titulo-seccion" id="tituloClientes" style="margin-top:50px;">Top 3 Clientes - May 2026</div>
-        
+        <div class="bars-container" id="barras" role="group" aria-label="Facturación por mes"></div>
+        <div class="titulo-seccion sep" id="tituloClientes"></div>
         <div class="summary-cards">
-            <div class="card" style="border-top-color: #e74c3c;">
-                <h3 id="cliente1-nombre">1. KEK&Eacute;N</h3>
-                <p id="cliente1-monto">$272,150</p>
-            </div>
-            <div class="card" style="border-top-color: #3498db;">
-                <h3 id="cliente2-nombre">2. PLAN.CONST</h3>
-                <p id="cliente2-monto">$60,016</p>
-            </div>
-            <div class="card" style="border-top-color: #9b59b6;">
-               <h3 id="cliente3-nombre">3. SIT</h3>
-                <p id="cliente3-monto">$34,460</p>
-            </div>
+            <div class="card c-rojo"><h3 id="cliente1-nombre"></h3><p id="cliente1-monto"></p></div>
+            <div class="card c-azul"><h3 id="cliente2-nombre"></h3><p id="cliente2-monto"></p></div>
+            <div class="card c-morado"><h3 id="cliente3-nombre"></h3><p id="cliente3-monto"></p></div>
         </div>
     </div>
 
-    <!-- 5. Herramientas (Carrusel de Videos) -->
-    <div id="herramientas" class="tab-content">
+    <!-- 5. Herramientas -->
+    <div id="herramientas" class="tab-content" role="tabpanel">
         <div class="titulo-seccion">Herramientas Operativas</div>
         <div class="carousel-wrapper">
-            <button class="carousel-btn prev-btn" data-carousel="track-videos" data-dir="-1">&#10094;</button>
-            <div class="carousel-track" id="track-videos" data-total="3" data-current="0">
-                <div class="carousel-slide">
-                    <video controls><source src="VIDEO/MUESTRA.mp4" type="video/mp4"></video>
-                </div>
-                <div class="carousel-slide">
-                    <video controls><source src="VIDEO/liebre.mp4" type="video/mp4"></video>
-                </div>
-                <div class="carousel-slide">
-                    <video controls><source src="VIDEO/lavable.mp4" type="video/mp4"></video>
-                </div>
+            <button class="carousel-btn prev-btn" aria-label="Anterior">&#10094;</button>
+            <div class="carousel-track">
+                <div class="carousel-slide"><video controls preload="metadata"><source src="VIDEO/MUESTRA.mp4" type="video/mp4"></video></div>
+                <div class="carousel-slide"><video controls preload="metadata"><source src="VIDEO/liebre.mp4" type="video/mp4"></video></div>
+                <div class="carousel-slide"><video controls preload="metadata"><source src="VIDEO/lavable.mp4" type="video/mp4"></video></div>
             </div>
-            <button class="carousel-btn next-btn" data-carousel="track-videos" data-dir="1">&#10095;</button>
+            <button class="carousel-btn next-btn" aria-label="Siguiente">&#10095;</button>
         </div>
-        <p style="text-align:center; color:#7f8c8d; margin-top:20px;">Desliza para ver más videos formativos.</p>
+        <p class="nota">Desliza para ver más videos formativos.</p>
     </div>
 
     <!-- 6. Comparativos -->
-    <div id="comparativos" class="tab-content">
+    <div id="comparativos" class="tab-content" role="tabpanel">
         <div class="titulo-seccion">Comparativos Visuales y Técnicos</div>
-        
-        <div class="carousel-wrapper carousel-imagenes" style="margin-bottom: 40px;">
-            <button class="carousel-btn prev-btn" data-carousel="track-imagenes" data-dir="-1">&#10094;</button>
-            <div class="carousel-track" id="track-imagenes" data-total="4" data-current="0">
-                <div class="carousel-slide"><img src="IMAGENES/comparativo100.png" alt="Comparativo 1"></div>
-                <div class="carousel-slide"><img src="IMAGENES/comparativopro.png" alt="Comparativo 2"></div>
-                <div class="carousel-slide"><img src="IMAGENES/comparativorp6.png" alt="Comparativo 3"></div>
-                <div class="carousel-slide"><img src="IMAGENES/comparativovini.png" alt="Comparativo 4"></div>
+
+        <div class="carousel-wrapper carousel-imagenes">
+            <button class="carousel-btn prev-btn" aria-label="Anterior">&#10094;</button>
+            <div class="carousel-track">
+                <div class="carousel-slide"><img src="IMAGENES/comparativo100.png" alt="Comparativo 1" loading="lazy"></div>
+                <div class="carousel-slide"><img src="IMAGENES/comparativopro.png" alt="Comparativo 2" loading="lazy"></div>
+                <div class="carousel-slide"><img src="IMAGENES/comparativorp6.png" alt="Comparativo 3" loading="lazy"></div>
+                <div class="carousel-slide"><img src="IMAGENES/comparativovini.png" alt="Comparativo 4" loading="lazy"></div>
             </div>
-            <button class="carousel-btn next-btn" data-carousel="track-imagenes" data-dir="1">&#10095;</button>
+            <button class="carousel-btn next-btn" aria-label="Siguiente">&#10095;</button>
         </div>
 
         <div class="comparativa-container">
             <div class="comp-header">
-                <div class="comp-logo-box">
-                    <img src="IMAGENES/logocomex.jpg" alt="Logo Comex" class="comp-logo">
-                </div>
+                <div class="comp-logo-box"><img src="IMAGENES/logocomex.jpg" alt="Logo Comex" class="comp-logo"></div>
                 <div class="comp-vs-badge">VS</div>
-                <div class="comp-logo-box">
-                    <img src="IMAGENES/logosherwin.png" alt="Logo Sherwin Williams" class="comp-logo">
-                </div>
+                <div class="comp-logo-box"><img src="IMAGENES/logosherwin.png" alt="Logo Sherwin Williams" class="comp-logo"></div>
             </div>
 
             <div class="comp-body">
                 <div class="comp-producto">
-                    <div class="comp-lata-img">
-                        <img src="IMAGENES/latarp6.png" alt="Lata RP-6">
-                    </div>
+                    <div class="comp-lata-img"><img src="IMAGENES/latarp6.png" alt="Lata RP-6"></div>
                     <h3 class="comp-prod-nombre">RP-6</h3>
                 </div>
 
@@ -234,55 +134,46 @@
                         <span class="comp-propiedad">Rendimiento m2 (1 mils secos)</span>
                         <span class="comp-valor-der">16.9 m2 / L</span>
                     </div>
-
                     <div class="comp-fila" data-desc="Rendimiento práctico estimado en condiciones reales de aplicación a un espesor industrial estándar de 3 mils.">
                         <span class="comp-valor-izq mejor-opcion">6.89 m2 / L <span class="badge-mejor">Mejor</span></span>
                         <span class="comp-propiedad">Rendimiento a (3 mils secos)</span>
-                        <span class="comp-valor-der">4.97 L</span>
+                        <span class="comp-valor-der">4.97 m2 / L</span>
                     </div>
-
                     <div class="comp-fila" data-desc="Tiempo requerido para que la película de recubrimiento seque superficialmente y evite adherencia de polvo.">
                         <span class="comp-valor-izq">4 Hr a 32°C</span>
                         <span class="comp-propiedad">Secado al tacto</span>
                         <span class="comp-valor-der mejor-opcion">5 - 15 min <span class="badge-mejor">Mejor</span></span>
                     </div>
-
                     <div class="comp-fila" data-desc="Ventana de tiempo óptima para aplicar capas sucesivas de recubrimiento sin comprometer la adherencia.">
                         <span class="comp-valor-izq">12 Hr a 32°C</span>
                         <span class="comp-propiedad">Tiempo repintado</span>
                         <span class="comp-valor-der mejor-opcion">4 horas <span class="badge-mejor">Mejor</span></span>
                     </div>
-
                     <div class="comp-fila" data-desc="Proporción de material que permanece sobre la superficie tras evaporarse los solventes. Mayor porcentaje reduce el riesgo de contracción y fallas.">
                         <span class="comp-valor-izq mejor-opcion">70% <span class="badge-mejor">Mejor</span></span>
-                        <span class="comp-propiedad">Solidos por Volumen</span>
+                        <span class="comp-propiedad">Sólidos por Volumen</span>
                         <span class="comp-valor-der">43.50%</span>
                     </div>
-
                     <div class="comp-fila" data-desc="Proporción volumétrica de los componentes (A y B) para iniciar el proceso químico de curado.">
                         <span class="comp-valor-izq">1:1</span>
-                        <span class="comp-propiedad">Relacion mezcla</span>
+                        <span class="comp-propiedad">Relación mezcla</span>
                         <span class="comp-valor-der">4:1</span>
                     </div>
-
                     <div class="comp-fila" data-desc="Volumen total de mezcla líquida obtenido por cada kit comercial adquirido.">
                         <span class="comp-valor-izq mejor-opcion">36 L <span class="badge-mejor">Mejor</span></span>
                         <span class="comp-propiedad">Litros por KIT</span>
                         <span class="comp-valor-der">18 L</span>
                     </div>
-
                     <div class="comp-fila destaque" data-desc="Inversión monetaria global necesaria para adquirir el kit completo de producto. ADVERTENCIA: El costo por KIT NO refleja por sí misma una medida de ahorro.">
                         <span class="comp-valor-izq">$ 7,654.93</span>
                         <span class="comp-propiedad">Costo por KIT</span>
                         <span class="comp-valor-der alerta-opcion">$ 7,088.14 <span class="badge-alerta">Atención</span></span>
                     </div>
-
                     <div class="comp-fila destaque" data-desc="Costo resultante por cada litro de producto listo para ser aplicado en obra.">
                         <span class="comp-valor-izq mejor-opcion">$ 212.64 <span class="badge-mejor">Mejor</span></span>
                         <span class="comp-propiedad">Costo por litro</span>
                         <span class="comp-valor-der">$ 393.79</span>
                     </div>
-
                     <div class="comp-fila destaque" data-desc="Costo final de aplicación por metro cuadrado considerando rendimiento real y espesor recomendado. Clave para el presupuesto global.">
                         <span class="comp-valor-izq mejor-opcion">$ 30.86 <span class="badge-mejor">Mejor</span></span>
                         <span class="comp-propiedad">Costo por m2</span>
@@ -291,9 +182,7 @@
                 </div>
 
                 <div class="comp-producto">
-                    <div class="comp-lata-img">
-                        <img src="IMAGENES/latapromax.jpg" alt="Lata Promax">
-                    </div>
+                    <div class="comp-lata-img"><img src="IMAGENES/latapromax.jpg" alt="Lata Promax"></div>
                     <h3 class="comp-prod-nombre">PROMAX</h3>
                 </div>
             </div>
@@ -301,140 +190,73 @@
     </div>
 
     <!-- 7. Comparativo VDT -->
-    <div id="vdt" class="tab-content">
-        <div class="titulo-seccion">Comparativo VDT: Evoluci&oacute;n Cronol&oacute;gica (2025 vs 2026)</div>
-        
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 25px; max-width: 900px; margin-left: auto; margin-right: auto; background: #2c3e50; padding: 12px 20px; border-radius: 8px;">
-            <button id="btnPlay" style="background: #2ecc71; color: white; border: none; padding: 8px 18px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 15px; min-width: 110px;">▶ Reproducir</button>
-            <button id="btnReset" style="background: #e74c3c; color: white; border: none; padding: 8px 18px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 15px;">🔄 Reiniciar</button>
-            
-            <div style="flex-grow: 1; display: flex; align-items: center; position: relative; margin-left: 10px;">
-                <input type="range" id="videoTimeline" min="0" max="13" value="0" step="1" style="width: 100%; cursor: pointer; accent-color: #3498db; height: 6px;">
-            </div>
-            <span id="timelineLabel" style="color: white; font-size: 14px; font-weight: bold; min-width: 85px; text-align: right;">Ago '25</span>
+    <div id="vdt" class="tab-content" role="tabpanel">
+        <div class="titulo-seccion">Comparativo VDT: Evolución Cronológica (2025 vs 2026)</div>
+
+        <div class="vdt-controles">
+            <button id="btnPlay" type="button">▶ Reproducir</button>
+            <button id="btnReset" type="button">🔄 Reiniciar</button>
+            <input type="range" id="videoTimeline" min="0" max="13" value="0" step="1" aria-label="Línea de tiempo">
+            <span id="timelineLabel">Ago '25</span>
         </div>
 
-        <div class="svg-container" id="contenedor-cronologia" style="height: 520px; position: relative;">
+        <div class="svg-container svg-vdt" id="contenedor-cronologia">
             <div id="tooltip-vdt" class="tooltip-punto"></div>
-            
-            <svg viewBox="-85 0 945 350" id="svgCronologia">
-                <text x="-30" y="16" class="axis-label" text-anchor="end">1.5M</text>
-                <line x1="0" y1="12" x2="840" y2="12" class="grid-line" />
-
-                <text x="-30" y="36" class="axis-label" text-anchor="end">1.3M</text>
-                <line x1="0" y1="32" x2="840" y2="32" class="grid-line" />
-
-                <text x="-30" y="56" class="axis-label" text-anchor="end">1.1M</text>
-                <line x1="0" y1="52" x2="840" y2="52" class="grid-line" />
-
-                <text x="-30" y="76" class="axis-label" text-anchor="end">900k</text>
-                <line x1="0" y1="72" x2="840" y2="72" class="grid-line" />
-
-                <text x="-30" y="96" class="axis-label" text-anchor="end">700k</text>
-                <line x1="0" y1="92" x2="840" y2="92" class="grid-line" />
-
-                <text x="-30" y="121" class="axis-label" text-anchor="end">500k</text>
-                <line x1="0" y1="117" x2="840" y2="117" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="136" class="axis-label" text-anchor="end">475k</text>
-                <line x1="0" y1="132" x2="840" y2="132" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="151" class="axis-label" text-anchor="end">450k</text>
-                <line x1="0" y1="147" x2="840" y2="147" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="166" class="axis-label" text-anchor="end">425k</text>
-                <line x1="0" y1="162" x2="840" y2="162" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="181" class="axis-label" text-anchor="end">400k</text>
-                <line x1="0" y1="177" x2="840" y2="177" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="196" class="axis-label" text-anchor="end">375k</text>
-                <line x1="0" y1="192" x2="840" y2="192" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="211" class="axis-label" text-anchor="end">350k</text>
-                <line x1="0" y1="207" x2="840" y2="207" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="226" class="axis-label" text-anchor="end">325k</text>
-                <line x1="0" y1="222" x2="840" y2="222" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="241" class="axis-label" text-anchor="end">300k</text>
-                <line x1="0" y1="237" x2="840" y2="237" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="256" class="axis-label" text-anchor="end">275k</text>
-                <line x1="0" y1="252" x2="840" y2="252" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="271" class="axis-label" text-anchor="end">250k</text>
-                <line x1="0" y1="267" x2="840" y2="267" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="286" class="axis-label" text-anchor="end">225k</text>
-                <line x1="0" y1="282" x2="840" y2="282" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="301" class="axis-label" text-anchor="end">200k</text>
-                <line x1="0" y1="297" x2="840" y2="297" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="316" class="axis-label" text-anchor="end">175k</text>
-                <line x1="0" y1="312" x2="840" y2="312" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="331" class="axis-label" text-anchor="end">150k</text>
-                <line x1="0" y1="327" x2="840" y2="327" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="346" class="axis-label" text-anchor="end">125k</text>
-                <line x1="0" y1="342" x2="840" y2="342" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="361" class="axis-label" text-anchor="end" fill="#e74c3c" font-weight:bold">100k</text>
-                <line x1="0" y1="357" x2="840" y2="357" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,4" />
-
-                <text x="-30" y="376" class="axis-label" text-anchor="end">75k</text>
-                <line x1="0" y1="372" x2="840" y2="372" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="391" class="axis-label" text-anchor="end">50k</text>
-                <line x1="0" y1="387" x2="840" y2="387" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="406" class="axis-label" text-anchor="end">25k</text>
-                <line x1="0" y1="402" x2="840" y2="402" class="grid-line" stroke-dasharray="2,2" />
-
-                <text x="-30" y="421" class="axis-label" text-anchor="end">0</text>
-                <line x1="0" y1="417" x2="840" y2="417" stroke="#bdc3c7" stroke-width="2" />
-
-                <path id="pathCarlos" d="" fill="none" stroke="#9b59b6" stroke-width="3" />
-                <path id="pathJavier" d="" fill="none" stroke="#f1c40f" stroke-width="3" />
-                <path id="pathAaron" d="" fill="none" stroke="#e74c3c" stroke-width="3" />
-
-                <g id="nodosCronologia"></g>
-
-                <text x="0" y="445" class="axis-label" text-anchor="middle">Ago '25</text>
-                <text x="65" y="445" class="axis-label" text-anchor="middle">Sep '25</text>
-                <text x="130" y="445" class="axis-label" text-anchor="middle">Oct '25</text>
-                <text x="195" y="445" class="axis-label" text-anchor="middle">Nov '25</text>
-                <text x="260" y="445" class="axis-label" text-anchor="middle">Dic '25</text>
-                <text x="325" y="445" class="axis-label" text-anchor="middle">Ene '26</text>
-                <text x="390" y="445" class="axis-label" text-anchor="middle">Feb '26</text>
-                <text x="455" y="445" class="axis-label" text-anchor="middle">Mar '26</text>
-                <text x="520" y="445" class="axis-label" text-anchor="middle">Abr '26</text>
-                <text x="585" y="445" class="axis-label" text-anchor="middle">May '26</text>
-                <text x="650" y="445" class="axis-label" text-anchor="middle">Jun '26</text>
-                <text x="715" y="445" class="axis-label" text-anchor="middle">Jul '26</text>
-                <text x="780" y="445" class="axis-label" text-anchor="middle">Ago '26</text>
-                <text x="845" y="445" class="axis-label" text-anchor="middle">Sep '26</text>
-            </svg>
+            <svg id="svgCronologia" viewBox="-85 0 945 460" role="img" aria-label="Evolución mensual por vendedor"></svg>
         </div>
-        
-        <div style="display: flex; justify-content: center; gap: 40px; margin-top: 30px; font-weight: bold; color: #34495e;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <div style="width: 15px; height: 15px; background: #9b59b6; border-radius: 50%;"></div> Carlos
+        <p class="nota">Escala partida: bajo 500k cada marca vale 25k; sobre 500k cada marca vale 200k.</p>
+        <div class="leyenda-vdt" id="leyendaVdt"></div>
+    </div>
+
+    <!-- 8. Análisis Dinámico -->
+    <div id="analisis-dinamico" class="tab-content" role="tabpanel">
+        <div class="titulo-seccion">Centro de Analítica y Filtrado Dinámico</div>
+
+        <div class="filtros">
+            <div class="filtro">
+                <label for="filtroMesDinamico">Filtrar por Mes:</label>
+                <select id="filtroMesDinamico"><option value="">Todos los meses</option></select>
             </div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <div style="width: 15px; height: 15px; background: #f1c40f; border-radius: 50%;"></div> Javier
+            <div class="filtro">
+                <label for="filtroCuentaDinamico">Filtrar por Cliente / Cuenta:</label>
+                <select id="filtroCuentaDinamico"><option value="">Todas las cuentas</option></select>
             </div>
-            <div style="display: flex; align-items: center; gap: 8px;">
-                <div style="width: 15px; height: 15px; background: #e74c3c; border-radius: 50%;"></div> Aarón
+            <div class="filtro">
+                <label for="filtroTextoDinamico">Búsqueda (factura / producto):</label>
+                <input type="search" id="filtroTextoDinamico" autocomplete="off" placeholder="Ej. VINIMEX, 220-8159...">
+            </div>
+        </div>
+
+        <div class="summary-cards kpis">
+            <div class="card c-azul"><h3>Venta Total (Con IVA)</h3><p id="kpiDinamicoConIva">$0.00</p></div>
+            <div class="card c-verde"><h3>Venta Neta (Sin IVA)</h3><p id="kpiDinamicoSinIva">$0.00</p></div>
+            <div class="card c-rojo"><h3>Transacciones Filtradas</h3><p id="kpiDinamicoCount">0</p></div>
+        </div>
+
+        <div class="tabla-panel">
+            <div class="tabla-cab">
+                <h3>Detalle Analítico de Registros</h3>
+                <span id="contadorRegistrosDinamicos">Mostrando 0 registros</span>
+            </div>
+            <div class="tabla-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th><th scope="col">Fecha</th><th scope="col">Mes</th>
+                            <th scope="col">Cotización</th><th scope="col">Factura</th><th scope="col">Cuenta</th>
+                            <th scope="col" class="num">Monto (Con IVA)</th><th scope="col" class="num">Monto Sin IVA</th>
+                            <th scope="col">Producto / Observación</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaDinamicaBody"></tbody>
+                </table>
             </div>
         </div>
     </div>
-
 </div>
 
-<!-- Enlace al Archivo JavaScript Externo -->
-<script src="funcionalidad.js"></script>
+<!-- datos.js define: const rawTransactions = [ ... ]; -->
+<script src="datos.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
