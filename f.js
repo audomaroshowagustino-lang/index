@@ -27,13 +27,13 @@ const rawTransactions = [
     { id: 25, fecha: "17 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8648", factura: "TC # - 0414", cuenta: "ING JORGE HERNANDEZ", monto: 13663.85, montoSinIva: 11779.18, producto: "( 2 - COMEX100)" },
     { id: 26, fecha: "17 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8629", factura: "TC # - 0415", cuenta: "ING RAFAEL", monto: 1469.55, montoSinIva: 1266.85, producto: "( 2 - EVERLAST)" },
     { id: 27, fecha: "19 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8670", factura: "TC # - 0417", cuenta: "ING JORGE HERNANDEZ", monto: 196.00, montoSinIva: 168.97, producto: "( 2 - PRO1000)" },
-    { id: 28, fecha: "19 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8679", factura: "TC # - 04222", cuenta: "ING HECTOR", monto: 13360.07, montoSinIva: 11517.30, producto: "( 2 - DUREX)" },
-    { id: 29, fecha: "19 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8689", factura: "TC # - 0421", cuenta: "ING HECTOR", monto: 172.00, montoSinIva: 148.28, producto: "( 2 - DUREX)" },
-    { id: 30, fecha: "19 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8695", factura: "TC # - 0420", cuenta: "ING HECTOR", monto: 1798.42, montoSinIva: 1550.36, producto: "( 2 - SELLADOR)" },
+    { id: 28, fecha: "19 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8679", factura: "TC # - 04222", cuenta: "ING HECTOR LOREDO", monto: 13360.07, montoSinIva: 11517.30, producto: "( 2 - DUREX)" },
+    { id: 29, fecha: "19 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8689", factura: "TC # - 0421", cuenta: "ING HECTOR LOREDO", monto: 172.00, montoSinIva: 148.28, producto: "( 2 - DUREX)" },
+    { id: 30, fecha: "19 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8695", factura: "TC # - 0420", cuenta: "ING HECTOR LOREDO", monto: 1798.42, montoSinIva: 1550.36, producto: "( 2 - SELLADOR)" },
     { id: 31, fecha: "21 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8593", factura: "FICCXX - 4937", cuenta: "BONATTI SPA", monto: 9736.83, montoSinIva: 8393.82, producto: "(THINNER)" },
-    { id: 32, fecha: "25 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8775", factura: "TC # - 0427", cuenta: "ING HECTOR", monto: 7198.59, montoSinIva: 6205.68, producto: "(DUREX)" },
-    { id: 33, fecha: "25 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8745", factura: "TC # - 0426", cuenta: "ING HECTOR", monto: 11997.65, montoSinIva: 10342.80, producto: "(DUREX)" },
-    { id: 34, fecha: "27 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8821", factura: "TC # - 0432", cuenta: "ING HECTOR", monto: 2824.04, montoSinIva: 2434.52, producto: "(DUREX)" },
+    { id: 32, fecha: "25 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8775", factura: "TC # - 0427", cuenta: "ING HECTOR LOREDO", monto: 7198.59, montoSinIva: 6205.68, producto: "(DUREX)" },
+    { id: 33, fecha: "25 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8745", factura: "TC # - 0426", cuenta: "ING HECTOR LOREDO", monto: 11997.65, montoSinIva: 10342.80, producto: "(DUREX)" },
+    { id: 34, fecha: "27 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8821", factura: "TC # - 0432", cuenta: "ING HECTOR LOREDO", monto: 2824.04, montoSinIva: 2434.52, producto: "(DUREX)" },
     { id: 35, fecha: "26 FEB 26", mes: "FEBRERO", cotizacion: "220 - 8876", factura: "FICCXX - 4984", cuenta: "BONATTI SPA", monto: 27639.98, montoSinIva: 23827.57, producto: "(VINIMEX)" },
     { id: 36, fecha: "02 MAR 26", mes: "MARZO", cotizacion: "220 - 8822", factura: "FICCXX - 5006", cuenta: "CONTRATISTA BONATTI ALEJANDRO", monto: 975.91, montoSinIva: 841.30, producto: "( 2 - COMEX 100 RAL 1023)" },
     { id: 37, fecha: "05 MAR 26", mes: "MARZO", cotizacion: "220 - 8877", factura: "TC # - 0435", cuenta: "ING HECTOR", monto: 1671.56, montoSinIva: 1441.00, producto: "( 2 - PRO 1000 NEGRO)" },
@@ -41,10 +41,10 @@ const rawTransactions = [
     { id: 39, fecha: "10 MAR 26", mes: "MARZO", cotizacion: "220 - 8612", factura: "FICCXX - 5061", cuenta: "TEGNOLOGIAS VALTO", monto: 5601.38, montoSinIva: 4828.78, producto: "( 2 - SIGMA SHIELD )" },
     { id: 40, fecha: "10 MAR 26", mes: "MARZO", cotizacion: "220 - 8914", factura: "FICCXX - 5060", cuenta: "KERMITY NOVELO", monto: 16589.95, montoSinIva: 14301.68, producto: "PAGADO ( 2 - COMEX 100 PET)" },
     { id: 41, fecha: "10 MAR 26", mes: "MARZO", cotizacion: "220 - 8909", factura: "FICCXX - 5073", cuenta: "CORROSION MASTER", monto: 7753.16, montoSinIva: 6683.76, producto: "PAGADO 31 MAR26 ( 2 - SIGMA FAST 278)" },
-    { id: 42, fecha: "09 MAR 26", mes: "MARZO", cotizacion: "220 - 8606", factura: "TC # - 0439", cuenta: "ING HECTOR", monto: 2871.32, montoSinIva: 2475.28, producto: "( 2 - ENDURENCE )" },
-    { id: 43, fecha: "10 MAR 26", mes: "MARZO", cotizacion: "220 - 8606", factura: "TC # - 0443", cuenta: "ING HECTOR", monto: 1199.76, montoSinIva: 1034.28, producto: "( 2 - ENDURENCE )" },
+    { id: 42, fecha: "09 MAR 26", mes: "MARZO", cotizacion: "220 - 8606", factura: "TC # - 0439", cuenta: "ING HECTOR LOREDO", monto: 2871.32, montoSinIva: 2475.28, producto: "( 2 - ENDURENCE )" },
+    { id: 43, fecha: "10 MAR 26", mes: "MARZO", cotizacion: "220 - 8606", factura: "TC # - 0443", cuenta: "ING HECTOR LOREDO", monto: 1199.76, montoSinIva: 1034.28, producto: "( 2 - ENDURENCE )" },
     { id: 44, fecha: "10 MAR 26", mes: "MARZO", cotizacion: "220 - 8935", factura: "FICCXX - 5072", cuenta: "CORROSION MASTER", monto: 8333.34, montoSinIva: 7183.91, producto: "PAGO 30MAR26 ( 2 - SIGMA FAST 278)" },
-    { id: 45, fecha: "12 MAR 26", mes: "MARZO", cotizacion: "220 - 8976", factura: "TC # - 0448", cuenta: "ING HECTOR", monto: 1199.76, montoSinIva: 1034.28, producto: "( 2 - ENDURENCE )" },
+    { id: 45, fecha: "12 MAR 26", mes: "MARZO", cotizacion: "220 - 8976", factura: "TC # - 0448", cuenta: "ING HECTOR LOREDO", monto: 1199.76, montoSinIva: 1034.28, producto: "( 2 - ENDURENCE )" },
     { id: 46, fecha: "12 MAR 26", mes: "MARZO", cotizacion: "220 - 8967", factura: "FICCXX - 5086", cuenta: "CORROSION MASTER", monto: 11872.74, montoSinIva: 10235.12, producto: "PAGADO 08ABR26 ( 2 - SIGMASHIELD)" },
     { id: 47, fecha: "13 MAR 26", mes: "MARZO", cotizacion: "220 - 8918", factura: "TC # - 0450", cuenta: "SR. ARTURO", monto: 5568.00, montoSinIva: 4800.00, producto: "( 2 - EVERLAST 5AÑOS )" },
     { id: 48, fecha: "17 MAR 26", mes: "MARZO", cotizacion: "220 - 8995", factura: "FICCXX - 5102", cuenta: "ADSA", monto: 1820.30, montoSinIva: 1569.22, producto: "( 2 - ENDURENCE )" },
@@ -55,7 +55,7 @@ const rawTransactions = [
     { id: 53, fecha: "30 MAR 26", mes: "MARZO", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 5182", cuenta: "CORROSION MASTER", monto: 11629.74, montoSinIva: 10025.64, producto: "CREDITO ( 2 - SIGMA FAST 278)" },
     { id: 54, fecha: "31 MAR 26", mes: "MARZO", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 5199", cuenta: "CORROSION MASTER", monto: 11629.74, montoSinIva: 10025.64, producto: "CREDITO ( 2 - SIGMA FAST 278)" },
     { id: 55, fecha: "06 ABR 26", mes: "ABRIL", cotizacion: "220 - 9093", factura: "TC # - 0459", cuenta: "PARTICULAR", monto: 1069.00, montoSinIva: 921.55, producto: "( 2 - IMPERCOMEX5AÑOS)" },
-    { id: 56, fecha: "06 ABR 26", mes: "ABRIL", cotizacion: "220 - 9169", factura: "TC # - 0458", cuenta: "ING HECTOR", monto: 2399.53, montoSinIva: 2068.56, producto: "( 2 - ENDURENCE)" },
+    { id: 56, fecha: "06 ABR 26", mes: "ABRIL", cotizacion: "220 - 9169", factura: "TC # - 0458", cuenta: "ING HECTOR LOREDO", monto: 2399.53, montoSinIva: 2068.56, producto: "( 2 - ENDURENCE)" },
     { id: 57, fecha: "07 ABR 26", mes: "ABRIL", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 5224", cuenta: "CORROSION MASTER", monto: 5254.09, montoSinIva: 4529.39, producto: "CREDITO ( 2 - SIGMA FAST 278)" },
     { id: 58, fecha: "07 ABR 26", mes: "ABRIL", cotizacion: "220 - 9158", factura: "TC # - 0463", cuenta: "CONTRATISTA RODRIGO", monto: 1495.19, montoSinIva: 1288.96, producto: "( 2 - IMPERCOMEX5AÑOS)" },
     { id: 59, fecha: "08 ABR 26", mes: "ABRIL", cotizacion: "220 - 9191", factura: "FICCXX - 5238", cuenta: "CORROSION MASTER", monto: 7753.16, montoSinIva: 6683.76, producto: "CREDITO ( 2 - SIGMA FAST 278)" },
@@ -126,7 +126,7 @@ const rawTransactions = [
     { id: 124, fecha: "29 JUN 26", mes: "JUNIO", cotizacion: "220 - 10304", factura: "TC # - 0575", cuenta: "CONSTRUCCIONES PENINSULARES DBSM", monto: 2166.00, montoSinIva: 1867.24, producto: "(2-SOLUTION)" },
     { id: 125, fecha: "29 JUN 26", mes: "JUNIO", cotizacion: "220 - 10313", factura: "FICCXX - 5809", cuenta: "GRUPO PYRGOS", monto: 3841.00, montoSinIva: 3311.21, producto: "(2- PRO1000)(ACCESORIOS)" },
     { id: 126, fecha: "30 JUN 26", mes: "JUNIO", cotizacion: "220 - 10350", factura: "TC # - 0578", cuenta: "ING JAIME NIGMO", monto: 5682.64, montoSinIva: 4898.83, producto: "(COMEX 100 TOTAL PET)" },
-    { id: 127, fecha: "02 JUL 26", mes: "JULIO", cotizacion: "220 - 10374", factura: "TC # - 0581", cuenta: "ING HECTOR", monto: 1199.75, montoSinIva: 1034.27, producto: "(2-SOLUTION C.C 279-02 ARRULLO)" },
+    { id: 127, fecha: "02 JUL 26", mes: "JULIO", cotizacion: "220 - 10374", factura: "TC # - 0581", cuenta: "ING HECTOR LOREDO", monto: 1199.75, montoSinIva: 1034.27, producto: "(2-SOLUTION C.C 279-02 ARRULLO)" },
     { id: 128, fecha: "06 JUL 26", mes: "JULIO", cotizacion: "220 - 10375", factura: "TC # - 0581", cuenta: "ING EDUARDO [ALTABRISA51]", monto: 4029.00, montoSinIva: 3473.28, producto: "(2-SOLUTION) (2-ALKAFIN) (OK RESANADO)" },
     { id: 129, fecha: "07 JUL 26", mes: "JULIO", cotizacion: "ORDER / 00850 / OA / 26000830 / 0", factura: "FICCXX - 6003", cuenta: "BONATTI SPA", monto: 391815.09, montoSinIva: 337771.63, producto: "(2-COMEX 100 T0TAL PET) (2-AQCUA 100)" },
     { id: 130, fecha: "08 JUL 26", mes: "JULIO", cotizacion: "220 - 10432", factura: "TC # - 0591", cuenta: "CORROSION MASTER", monto: 6424.52, montoSinIva: 5538.38, producto: "(2-COMEX 100 T0TAL PET) (2-AQCUA 100)" },
@@ -201,14 +201,30 @@ const rawTransactions = [
     { id: 199, fecha: "01 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11636", factura: "TC # - 0703", cuenta: "ESCOPICO", monto: 7417.97, montoSinIva: 6394.80, producto: "(PRO1000 BLANCO OSTION)" },
     { id: 200, fecha: "29 SEP 26", mes: "OCTUBRE", cotizacion: "220 - 11614", factura: "FICCXX - 6500", cuenta: "ENALTO", monto: 6451.50, montoSinIva: 5561.64, producto: "(VINIMEX NF)(CANCELACION SEPTIEMBRE)" },
     { id: 201, fecha: "02 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11651", factura: "TC # - 0704", cuenta: "ESCOPICO", monto: 2034.64, montoSinIva: 1754.00, producto: "(PRO1000 BLANCO OSTION)" },
-    { id: 202, fecha: "02 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11658", factura: "TC # - 0705", cuenta: "TALLER DE HERRERIA DOMINGUEZ", monto: 1064.80, montoSinIva: 917.93, producto: "(FLASH COAT NEGRO MATE)" },
+    { id: 202, fecha: "02 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11658", factura: "TC # - 0705", cuenta: "HERRERIA 42S", monto: 1064.80, montoSinIva: 917.93, producto: "(FLASH COAT NEGRO MATE)" },
     { id: 203, fecha: "02 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11661", factura: "FICCXX - 6514", cuenta: "GRUPO PYRGOS", monto: 5838.16, montoSinIva: 5032.90, producto: "(VINIMEX CLASICA NF)(ACCESORIOS)" },
     { id: 204, fecha: "03 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11663", factura: "FICCXX - 6519", cuenta: "FREYCO MEXICO", monto: 1795.91, montoSinIva: 1548.20, producto: "(IMPERCOMEX 5 AÑOS)" },
     { id: 205, fecha: "05 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11681", factura: "TC # - 0708", cuenta: "ING JAIME NIGMO", monto: 3330.59, montoSinIva: 2871.20, producto: "(SELLADOR CLASICO)(ACCESORIOS)" },
-    { id: 206, fecha: "06 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11675", factura: "FICCXX - 6528", cuenta: "HECTOR LOREDO", monto: 2134.40, montoSinIva: 1840.00, producto: "(SOLUTION PRO)" },
+    { id: 206, fecha: "06 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11675", factura: "FICCXX - 6528", cuenta: " ING HECTOR LOREDO", monto: 2134.40, montoSinIva: 1840.00, producto: "(SOLUTION PRO)" },
     { id: 207, fecha: "02 OCT 26", mes: "OCTUBRE", cotizacion: "TICKET DIRECTO", factura: "TC # - 0710", cuenta: "ESCOPICO", monto: 7417.97, montoSinIva: 6394.80, producto: "(PRO1000 BLANCO OSTION)" },
     { id: 208, fecha: "09 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11721", factura: "FICCXX - 6545", cuenta: "ENALTO", monto: 9676.21, montoSinIva: 8341.56, producto: "(SOLUTION PRO)" }
+    { id: 209, fecha: "14 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11690", factura: "FICCXX - 6570", cuenta: "COLONOS TORRE UNO", monto: 2017.51, montoSinIva: 1739.23, producto: "(AEROCOMEX)(ACCESORIOS)(PRO1000)" }
+    { id: 210, fecha: "16 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11837", factura: "FICCXX - 6582", cuenta: "ADSA", monto: 887.40, montoSinIva: 765.0, producto: "(SOLUTION PRO)" }
+    { id: 211, fecha: "16 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11846", factura: "TC # - 0720", cuenta: "ING CARLOS CASTELLANOS", monto: 9329.52, montoSinIva: 8042.69, producto: "(SOLUTION PRO)" }    
+    { id: 212, fecha: "19 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11798 / 11854", factura: "FICCXX - 6610", cuenta: "ALUPREMIER", monto: 7883.28, montoSinIva: 6795.93, producto: "(SIGMARINE 28)(FLASH COAT)" }
+    { id: 213, fecha: "21 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11896", factura: "TC # - 0726", cuenta: "ESCOPICO", monto: 7600.0, montoSinIva: 6551.72, producto: "(PRO1000)(SELLADOR CLASICO)" }
+    { id: 214, fecha: "23 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11919", factura: "FICCXX - 6637", cuenta: "ALUPREMIER", monto: 3640.0, montoSinIva: 3137.93, producto: "(VINIMEX CLASICA)(SELLADOR CLASICO)" }
+    { id: 215, fecha: "26 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11939", factura: "FICCXX - 6643", cuenta: "CORROSION MASTER", monto: 4450.94, montoSinIva: 3923.22, producto: "(COMEX 100 TOTAL PET)" }
+    { id: 216, fecha: "27 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11948", factura: "FICCXX - 6645", cuenta: "ING HECTOR LOREDO", monto: 9676.21, montoSinIva: 8341.56, producto: "(COMEX 100 TOTAL PET)" }  
+    { id: 217, fecha: "27 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11963", factura: "FICCXX - 6652", cuenta: "DESARROLLOS PETRA", monto: 16135.65, montoSinIva: 13910.04, producto: "(VINIMEX CLASICA)" }
+    { id: 218, fecha: "28 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11848", factura: "TC # - 0734", cuenta: "ESCOPICO", monto: 7418.0, montoSinIva: 6394.83, producto: "(PRO1000)" }
+    { id: 219, fecha: "28 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11963", factura: "TC # - 0735", cuenta: "HERRERIA 42S", monto: 2572.20, montoSinIva: 2217.41, producto: "(SPARE MARINO)(BARNIZ NOGAL CLASICO)" }
+    { id: 220, fecha: "29 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11995", factura: "FICCXX - 6669", cuenta: "HBS DELLI", monto: 36043.90, montoSinIva: 31072.33, producto: "(AMERLOCK 2/400)" }
+    { id: 221, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 12031", factura: "TC # - 0738", cuenta: "NIEVES", monto: 12760.0, montoSinIva: 11000.0, producto: "(VINIMEX CLASICA)" }
+    { id: 222, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 12025", factura: "TC # - 0739", cuenta: "HERRERIA 42 S", monto: 1415.0, montoSinIva: 1219.83, producto: "(ESMALTE ACRILICO)(THINNER AMERICANO & ESTANDAR)" }
+    { id: 223, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11770", factura: "FICCXX - 6673", cuenta: "BONATTI", monto: 36880.64, montoSinIva: 31793.56, producto: "(VINIMEX CLASICA)(DECONCKET)(SELLADOR CLASICO)" }
 ];
+
 
 /* ===== LÓGICA DEL DASHBOARD ===== */
 (() => {
