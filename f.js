@@ -226,6 +226,9 @@ const rawTransactions = [
 ];
 
 
+
+
+
 /* ===== LÓGICA DEL DASHBOARD ===== */
 (() => {
 'use strict';
