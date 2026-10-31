@@ -207,22 +207,22 @@ const rawTransactions = [
     { id: 205, fecha: "05 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11681", factura: "TC # - 0708", cuenta: "ING JAIME NIGMO", monto: 3330.59, montoSinIva: 2871.20, producto: "(SELLADOR CLASICO)(ACCESORIOS)" },
     { id: 206, fecha: "06 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11675", factura: "FICCXX - 6528", cuenta: " ING HECTOR LOREDO", monto: 2134.40, montoSinIva: 1840.00, producto: "(SOLUTION PRO)" },
     { id: 207, fecha: "02 OCT 26", mes: "OCTUBRE", cotizacion: "TICKET DIRECTO", factura: "TC # - 0710", cuenta: "ESCOPICO", monto: 7417.97, montoSinIva: 6394.80, producto: "(PRO1000 BLANCO OSTION)" },
-    { id: 208, fecha: "09 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11721", factura: "FICCXX - 6545", cuenta: "ENALTO", monto: 9676.21, montoSinIva: 8341.56, producto: "(SOLUTION PRO)" }
-    { id: 209, fecha: "14 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11690", factura: "FICCXX - 6570", cuenta: "COLONOS TORRE UNO", monto: 2017.51, montoSinIva: 1739.23, producto: "(AEROCOMEX)(ACCESORIOS)(PRO1000)" }
-    { id: 210, fecha: "16 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11837", factura: "FICCXX - 6582", cuenta: "ADSA", monto: 887.40, montoSinIva: 765.0, producto: "(SOLUTION PRO)" }
-    { id: 211, fecha: "16 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11846", factura: "TC # - 0720", cuenta: "ING CARLOS CASTELLANOS", monto: 9329.52, montoSinIva: 8042.69, producto: "(SOLUTION PRO)" }    
-    { id: 212, fecha: "19 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11798 / 11854", factura: "FICCXX - 6610", cuenta: "ALUPREMIER", monto: 7883.28, montoSinIva: 6795.93, producto: "(SIGMARINE 28)(FLASH COAT)" }
-    { id: 213, fecha: "21 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11896", factura: "TC # - 0726", cuenta: "ESCOPICO", monto: 7600.0, montoSinIva: 6551.72, producto: "(PRO1000)(SELLADOR CLASICO)" }
-    { id: 214, fecha: "23 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11919", factura: "FICCXX - 6637", cuenta: "ALUPREMIER", monto: 3640.0, montoSinIva: 3137.93, producto: "(VINIMEX CLASICA)(SELLADOR CLASICO)" }
-    { id: 215, fecha: "26 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11939", factura: "FICCXX - 6643", cuenta: "CORROSION MASTER", monto: 4450.94, montoSinIva: 3923.22, producto: "(COMEX 100 TOTAL PET)" }
-    { id: 216, fecha: "27 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11948", factura: "FICCXX - 6645", cuenta: "ING HECTOR LOREDO", monto: 9676.21, montoSinIva: 8341.56, producto: "(COMEX 100 TOTAL PET)" }  
-    { id: 217, fecha: "27 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11963", factura: "FICCXX - 6652", cuenta: "DESARROLLOS PETRA", monto: 16135.65, montoSinIva: 13910.04, producto: "(VINIMEX CLASICA)" }
-    { id: 218, fecha: "28 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11848", factura: "TC # - 0734", cuenta: "ESCOPICO", monto: 7418.0, montoSinIva: 6394.83, producto: "(PRO1000)" }
-    { id: 219, fecha: "28 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11963", factura: "TC # - 0735", cuenta: "HERRERIA 42S", monto: 2572.20, montoSinIva: 2217.41, producto: "(SPARE MARINO)(BARNIZ NOGAL CLASICO)" }
-    { id: 220, fecha: "29 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11995", factura: "FICCXX - 6669", cuenta: "HBS DELLI", monto: 36043.90, montoSinIva: 31072.33, producto: "(AMERLOCK 2/400)" }
-    { id: 221, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 12031", factura: "TC # - 0738", cuenta: "NIEVES", monto: 12760.0, montoSinIva: 11000.0, producto: "(VINIMEX CLASICA)" }
-    { id: 222, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 12025", factura: "TC # - 0739", cuenta: "HERRERIA 42 S", monto: 1415.0, montoSinIva: 1219.83, producto: "(ESMALTE ACRILICO)(THINNER AMERICANO & ESTANDAR)" }
-    { id: 223, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11770", factura: "FICCXX - 6673", cuenta: "BONATTI", monto: 36880.64, montoSinIva: 31793.56, producto: "(VINIMEX CLASICA)(DECONCKET)(SELLADOR CLASICO)" }
+    { id: 208, fecha: "09 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11721", factura: "FICCXX - 6545", cuenta: "ENALTO", monto: 9676.21, montoSinIva: 8341.56, producto: "(SOLUTION PRO)" },
+    { id: 209, fecha: "14 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11690", factura: "FICCXX - 6570", cuenta: "COLONOS TORRE UNO", monto: 2017.51, montoSinIva: 1739.23, producto: "(AEROCOMEX)(ACCESORIOS)(PRO1000)" },
+    { id: 210, fecha: "16 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11837", factura: "FICCXX - 6582", cuenta: "ADSA", monto: 887.40, montoSinIva: 765.0, producto: "(SOLUTION PRO)" },
+    { id: 211, fecha: "16 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11846", factura: "TC # - 0720", cuenta: "ING CARLOS CASTELLANOS", monto: 9329.52, montoSinIva: 8042.69, producto: "(SOLUTION PRO)" },
+    { id: 212, fecha: "19 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11798 / 11854", factura: "FICCXX - 6610", cuenta: "ALUPREMIER", monto: 7883.28, montoSinIva: 6795.93, producto: "(SIGMARINE 28)(FLASH COAT)" },
+    { id: 213, fecha: "21 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11896", factura: "TC # - 0726", cuenta: "ESCOPICO", monto: 7600.0, montoSinIva: 6551.72, producto: "(PRO1000)(SELLADOR CLASICO)" },
+    { id: 214, fecha: "23 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11919", factura: "FICCXX - 6637", cuenta: "ALUPREMIER", monto: 3640.0, montoSinIva: 3137.93, producto: "(VINIMEX CLASICA)(SELLADOR CLASICO)" },
+    { id: 215, fecha: "26 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11939", factura: "FICCXX - 6643", cuenta: "CORROSION MASTER", monto: 4450.94, montoSinIva: 3923.22, producto: "(COMEX 100 TOTAL PET)" },
+    { id: 216, fecha: "27 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11948", factura: "FICCXX - 6645", cuenta: "ING HECTOR LOREDO", monto: 9676.21, montoSinIva: 8341.56, producto: "(COMEX 100 TOTAL PET)" },  
+    { id: 217, fecha: "27 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11963", factura: "FICCXX - 6652", cuenta: "DESARROLLOS PETRA", monto: 16135.65, montoSinIva: 13910.04, producto: "(VINIMEX CLASICA)" },
+    { id: 218, fecha: "28 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11848", factura: "TC # - 0734", cuenta: "ESCOPICO", monto: 7418.0, montoSinIva: 6394.83, producto: "(PRO1000)" },
+    { id: 219, fecha: "28 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11963", factura: "TC # - 0735", cuenta: "HERRERIA 42S", monto: 2572.20, montoSinIva: 2217.41, producto: "(SPARE MARINO)(BARNIZ NOGAL CLASICO)" },
+    { id: 220, fecha: "29 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11995", factura: "FICCXX - 6669", cuenta: "HBS DELLI", monto: 36043.90, montoSinIva: 31072.33, producto: "(AMERLOCK 2/400)" },
+    { id: 221, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 12031", factura: "TC # - 0738", cuenta: "NIEVES", monto: 12760.0, montoSinIva: 11000.0, producto: "(VINIMEX CLASICA)" },
+    { id: 222, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 12025", factura: "TC # - 0739", cuenta: "HERRERIA 42 S", monto: 1415.0, montoSinIva: 1219.83, producto: "(ESMALTE ACRILICO)(THINNER AMERICANO & ESTANDAR)" },
+    { id: 223, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11770", factura: "FICCXX - 6673", cuenta: "BONATTI", monto: 36880.64, montoSinIva: 31793.56, producto: "(VINIMEX CLASICA)(DECONCKET)(SELLADOR CLASICO)" },
 ];
 
 
