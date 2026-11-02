@@ -1,4 +1,4 @@
-/* ===== DATOS: tu dataset verificado (208 registros) ===== */
+ /* ===== DATOS: tu dataset verificado (208 registros) ===== */
 const rawTransactions = [
     { id: 1, fecha: "06 ENE 26", mes: "ENERO", cotizacion: "220 - 8159", factura: "FICCXX - 4639", cuenta: "ADSA", monto: 1865.28, montoSinIva: 1608.0, producto: "(2-PRAKTICA)" },
     { id: 2, fecha: "12 ENE 26", mes: "ENERO", cotizacion: "220 - 8216", factura: "FICCXX - 4667", cuenta: "ADSA", monto: 6936.94, montoSinIva: 5980.12, producto: "(2-ENDURENCE)(2-IMPER3AÑ0S)" },
