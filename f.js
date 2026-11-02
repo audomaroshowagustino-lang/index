@@ -268,9 +268,9 @@ const OTROS_2026 = [
     [88008.62, 363098.28], [80360.34, 566065.52], [59389.66, 1459627.59], [110454.31, 337925.86]
 ];
 const SERIES = [
-    { nombre: 'Carlos', color: '#9b59b6', foto: 'IMAGENES/carlos.jpeg' },
-    { nombre: 'Javier', color: '#f1c40f', foto: 'IMAGENES/javier.jpeg' },
-    { nombre: 'Aarón',  color: '#e74c3c', foto: 'IMAGENES/aaron.jpeg' }
+    { nombre: 'Carlos', color: '#9b59b6', foto: 'imagen/carlos.jpeg' },
+    { nombre: 'Javier', color: '#f1c40f', foto: 'imagen/javier.jpeg' },
+    { nombre: 'Aarón',  color: '#e74c3c', foto: 'imagen/aaron.jpeg' }
 ];
 
 /* ===================== Utilidades ===================== */
