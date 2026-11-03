@@ -531,7 +531,7 @@ function construir(animar = false) {
         if (meta) svg.append(el('text', { x: ANCHO_X + 12, y: yy + 5, class: 'etiqueta-100k' }, 'Meta Base'));
     });
 
-    // Cada vendedor: puntos, acumulado y curva. Se asume que tiene datos desde el primer mes del rango hasta el último con dato.
+    // Cada vendedor: puntos, acumulado y curva. Se asume que tiene datos desde el primer mes del rango hasta el último con dato, retire + (f.parcial ? ' (papalote)' : '') de la linea 560.
     series = lista.map(s => {
         const pts = [];
         rango.forEach((f, i) => { const v = f.v[s.nombre]; if (v != null) pts.push({ x: i * pasoX, y: yEsc(v), v }); });
@@ -557,7 +557,7 @@ function construir(animar = false) {
                 class: 'punto-vendedor-hover',
                 transform: `translate(${p.x} ${p.y})`,
                 'data-nombre': s.nombre, 'data-mes': f.mes,
-                'data-val': fmt2(p.v) + (f.parcial ? ' (papalote)' : '')
+                'data-val': fmt2(p.v) 
             });
             nodo.append(
                 el('circle', { r: RADIO_PUNTO, fill: s.color, stroke: '#fff', 'stroke-width': 3 }),
