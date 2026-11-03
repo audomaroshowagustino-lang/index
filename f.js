@@ -557,7 +557,7 @@ function construir(animar = false) {
                 class: 'punto-vendedor-hover',
                 transform: `translate(${p.x} ${p.y})`,
                 'data-nombre': s.nombre, 'data-mes': f.mes,
-                'data-val': fmt2(p.v) + (f.parcial ?  : '')
+                'data-val': fmt2(p.v) + (f.parcial ? ' (papalote)' : '')
             });
             nodo.append(
                 el('circle', { r: RADIO_PUNTO, fill: s.color, stroke: '#fff', 'stroke-width': 3 }),
