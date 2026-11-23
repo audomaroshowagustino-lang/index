@@ -224,8 +224,22 @@ const rawTransactions = [
     { id: 221, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 12031", factura: "TC # - 0738", cuenta: "NIEVES", monto: 12760.0, montoSinIva: 11000.0, producto: "(VINIMEX CLASICA)" },
     { id: 222, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 12025", factura: "TC # - 0739", cuenta: "HERRERIA 42 S", monto: 1415.0, montoSinIva: 1219.83, producto: "(ESMALTE ACRILICO)(THINNER AMERICANO & ESTANDAR)" },
     { id: 223, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11770", factura: "FICCXX - 6673", cuenta: "BONATTI", monto: 36880.64, montoSinIva: 31793.56, producto: "(VINIMEX CLASICA)(DECONCKET)(SELLADOR CLASICO)" },
-    { id: 224, fecha: "02 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 11444", factura: "FICCXX - 6690", cuenta: "BONATTI", monto: 36880.64, montoSinIva: 90793.56, producto: "(VINIMEX CLASICA)(DECONCKET)(SELLADOR CLASICO)" },
-    { id: 225, fecha: "03 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 11774", factura: "FICCXX - 6860", cuenta: "BONATTI", monto: 36880.64, montoSinIva: 110793.56, producto: "(VINIMEX CLASICA)(DECONCKET)(SELLADOR CLASICO)" },
+    { id: 224, fecha: "02 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12045", factura: "TC # - 0741", cuenta: "ING CARLOS CASTELLANOS", monto: 9329.52, montoSinIva: 8042.69, producto: "(SOLUTION PRO)" },
+    { id: 225, fecha: "03 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12076", factura: "FICCXX - 6693", cuenta: "ENALTO", monto: 3225.40, montoSinIva: 2780.52, producto: "(VINIMEX 3 EN 1)" },
+    { id: 226, fecha: "05 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12102", factura: "TC # - 0741", cuenta: "ESCOPICO", monto: 5745.50, montoSinIva: 4953.02, producto: "(PRO 1000)(SELLADOR CLASICO" },
+    { id: 227, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 6716", cuenta: "ING CARLOS CASTELLANOS", monto: 14123.00, montoSinIva: 12175.00, producto: "(PRO 1000)(PRACTIKA)" },
+    { id: 228, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12125", factura: "TC # - 0746", cuenta: "ING EDUARDO", monto: 3822.43, montoSinIva: 3295.20, producto: "(SOLUTION PRO)(ALKAFIN)(ACCESORIOS" },
+    { id: 229, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "TICKET DIRECTO", factura: "TC # - 0747", cuenta: "ESCOPICO", monto: 1853.68, montoSinIva: 1598.00, producto: "(PRO 1000)" },
+    { id: 230, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12129", factura: "FICCXX - 6718", cuenta: "GRUPO PYRGOS", monto: 6175.28, montoSinIva: 5323.52, producto: "(VINIMEX CLASICA)(ACCESORIOS)" },
+    { id: 231, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12118", factura: "FICCXX - 6719", cuenta: "CONSTRUET", monto: 1846.72, montoSinIva: 1592.00, producto: "(PRO 1000)" },
+    { id: 227, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 6716", cuenta: "ING CARLOS CASTELLANOS", monto: 14123.00, montoSinIva: 12175.00, producto: "(PRO 1000)(PRACTIKA)" },
+    { id: 227, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 6716", cuenta: "ING CARLOS CASTELLANOS", monto: 14123.00, montoSinIva: 12175.00, producto: "(PRO 1000)(PRACTIKA)" },
+    { id: 227, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 6716", cuenta: "ING CARLOS CASTELLANOS", monto: 14123.00, montoSinIva: 12175.00, producto: "(PRO 1000)(PRACTIKA)" },
+    { id: 227, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 6716", cuenta: "ING CARLOS CASTELLANOS", monto: 14123.00, montoSinIva: 12175.00, producto: "(PRO 1000)(PRACTIKA)" },
+    { id: 227, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 6716", cuenta: "ING CARLOS CASTELLANOS", monto: 14123.00, montoSinIva: 12175.00, producto: "(PRO 1000)(PRACTIKA)" },
+    { id: 227, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 6716", cuenta: "ING CARLOS CASTELLANOS", monto: 14123.00, montoSinIva: 12175.00, producto: "(PRO 1000)(PRACTIKA)" },
+    
+    
 ];
 
 
