@@ -223,6 +223,8 @@ const rawTransactions = [
     { id: 221, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 12031", factura: "TC # - 0738", cuenta: "NIEVES", monto: 12760.0, montoSinIva: 11000.0, producto: "(VINIMEX CLASICA)" },
     { id: 222, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 12025", factura: "TC # - 0739", cuenta: "HERRERIA 42 S", monto: 1415.0, montoSinIva: 1219.83, producto: "(ESMALTE ACRILICO)(THINNER AMERICANO & ESTANDAR)" },
     { id: 223, fecha: "30 OCT 26", mes: "OCTUBRE", cotizacion: "220 - 11770", factura: "FICCXX - 6673", cuenta: "BONATTI", monto: 36880.64, montoSinIva: 31793.56, producto: "(VINIMEX CLASICA)(DECONCKET)(SELLADOR CLASICO)" }
+    { id: 224, fecha: "02 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 11444", factura: "FICCXX - 6690", cuenta: "BONATTI", monto: 36880.64, montoSinIva: 90793.56, producto: "(VINIMEX CLASICA)(DECONCKET)(SELLADOR CLASICO)" }
+    { id: 225, fecha: "03 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 11774", factura: "FICCXX - 6860", cuenta: "BONATTI", monto: 36880.64, montoSinIva: 110793.56, producto: "(VINIMEX CLASICA)(DECONCKET)(SELLADOR CLASICO)" }
 ];
 
 
