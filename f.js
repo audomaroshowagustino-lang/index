@@ -228,7 +228,7 @@ const rawTransactions = [
     { id: 225, fecha: "03 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12076", factura: "FICCXX - 6693", cuenta: "ENALTO", monto: 3225.40, montoSinIva: 2780.52, producto: "(VINIMEX 3 EN 1)" },
     { id: 226, fecha: "05 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12102", factura: "TC # - 0741", cuenta: "ESCOPICO", monto: 5745.50, montoSinIva: 4953.02, producto: "(PRO 1000)(SELLADOR CLASICO" },
     { id: 227, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 6716", cuenta: "ING CARLOS CASTELLANOS", monto: 14123.00, montoSinIva: 12175.00, producto: "(PRO 1000)(PRACTIKA)" },
-    { id: 228, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12125", factura: "TC # - 0746", cuenta: "ING EDUARDO", monto: 3822.43, montoSinIva: 3295.20, producto: "(SOLUTION PRO)(ALKAFIN)(ACCESORIOS" },
+    { id: 228, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12125", factura: "TC # - 0746", cuenta: "ING EDUARDO [ALTABRISA51]", monto: 3822.43, montoSinIva: 3295.20, producto: "(SOLUTION PRO)(ALKAFIN)(ACCESORIOS" },
     { id: 229, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "TICKET DIRECTO", factura: "TC # - 0747", cuenta: "ESCOPICO", monto: 1853.68, montoSinIva: 1598.00, producto: "(PRO 1000)" },
     { id: 230, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12129", factura: "FICCXX - 6718", cuenta: "GRUPO PYRGOS", monto: 6175.28, montoSinIva: 5323.52, producto: "(VINIMEX CLASICA)(ACCESORIOS)" },
     { id: 231, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12118", factura: "FICCXX - 6719", cuenta: "CONSTRUET", monto: 21658.00, montoSinIva: 18670.69, producto: "(PRO 1000)" },
@@ -251,6 +251,8 @@ const rawTransactions = [
     { id: 248, fecha: "20 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 122284", factura: "FICCXX - 6819", cuenta: "ENALTO", monto: 3225.75, montoSinIva: 2780.82, producto: "(VINIMEX 3 EN 1)" },
     { id: 249, fecha: "20 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12295", factura: "FICCXX - 6820", cuenta: "HERREIRA 42S", monto: 2721.17, montoSinIva: 2345.84, producto: "(ESMALTE 100)(FLASH COAT)" },
     { id: 250, fecha: "23 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12310", factura: "FICCXX - 6829", cuenta: "GRUPO PYRGOS", monto: 20595.58, montoSinIva: 17754.81, producto: "(ACQUA100)(VINIMEX TOTAL)(ACCESORIOS)" },
+    { id: 251, fecha: "24 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 13329", factura: "TC # - 0771", cuenta: "ING EDUARDO [ALTABRISA51]", monto: 1691.20, montoSinIva: 1457.93, producto: "(SOLUTION PRO)(SELLADOR CLASICO)" },
+    { id: 252, fecha: "24 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12326", factura: "FICCXX - 6838", cuenta: "GRUPO PYRGOS", monto: 991.00, montoSinIva: 854.321, producto: "(TOP IMPER A REFORZADO)(ACCESORIOS)" },
     
     
     
