@@ -240,10 +240,17 @@ const rawTransactions = [
     { id: 237, fecha: "12 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12187", factura: "FICCXX - 6756", cuenta: "ING CARLOS CASTELLANOS", monto: 9329.52, montoSinIva: 8042.69, producto: "(SOLUTION PRO BLANCO OSTION)(PRACTIKA FOCO)" },
     { id: 238, fecha: "12 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12189", factura: "FICCXX - 6764", cuenta: "ING CARLOS CASTELLANOS", monto: 6633.63, montoSinIva: 5718.65, producto: "(SOLUTION PRO BLANCO OSTION)" },
     { id: 239, fecha: "12 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12190", factura: "FICCXX - 6765", cuenta: "HERRERIA 42S", monto: 5165.07, montoSinIva: 4452.65, producto: "(ESMALTE)(BARNIZ" },
-    { id: 240, fecha: "13 NOV 26", mes: "NOVIEMBRE", cotizacion: "TICKET DIRECTO", factura: "TC # 0759", cuenta: "ESCOPICO", monto: 2950.00, montoSinIva: 2543.10, producto: "(PRO 1000 ORION & BRETON)" },
-    { id: 241, fecha: "13 NOV 26", mes: "NOVIEMBRE", cotizacion: "TICKET DIRECTO", factura: "TC # 0761", cuenta: "FREYCO MEXICO", monto: 1907.96, montoSinIva: 1644.79, producto: "(IMPERCOMEX 5 AÑOS)" },
-    { id: 236, fecha: "12 NOV 26", mes: "NOVIEMBRE", cotizacion: "12161", factura: "FICCXX - 6762", cuenta: "FREYCO MEXICO", monto: 1907.96, montoSinIva: 1644.79, producto: "(IMPERCOMEX 5 AÑOS)" },
-    { id: 236, fecha: "12 NOV 26", mes: "NOVIEMBRE", cotizacion: "12161", factura: "FICCXX - 6762", cuenta: "FREYCO MEXICO", monto: 1907.96, montoSinIva: 1644.79, producto: "(IMPERCOMEX 5 AÑOS)" },
+    { id: 240, fecha: "13 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12196", factura: "FICCXX - 6767", cuenta: "ENALTO", monto: 6451.50, montoSinIva: 5561.64, producto: "(VINIMEX 3 EN 1)" },
+    { id: 241, fecha: "13 NOV 26", mes: "NOVIEMBRE", cotizacion: "TICKET DIRECTO", factura: "TC # 0759", cuenta: "ESCOPICO", monto: 2950.00, montoSinIva: 2543.10, producto: "(PRO 1000 ORION & BRETON)" },
+    { id: 242, fecha: "13 NOV 26", mes: "NOVIEMBRE", cotizacion: "TICKET DIRECTO", factura: "TC # 0761", cuenta: "ING JAIME NIGMO", monto: 3709.00, montoSinIva: 3197.41, producto: "(ACCESORIOS)(VINIMEX CLASICA)" },
+    { id: 243, fecha: "13 NOV 26", mes: "NOVIEMBRE", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 6779", cuenta: "GRUPO PYRGOS", monto: 930.0, montoSinIva: 801.72, producto: "(ACCESORIOS)" },
+    { id: 244, fecha: "14 NOV 26", mes: "NOVIEMBRE", cotizacion: "FACTURA DIRECTA", factura: "FICCXX - 6785", cuenta: "COLONOS TORRE 1", monto: 4810.59, montoSinIva: 4147.06, producto: "(VIA COLOR)(THINNER)" },
+    { id: 245, fecha: "17 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12231", factura: "FICCXX - 6796", cuenta: "ALUPREMIER", monto: 6818.48, montoSinIva: 5878.00, producto: "(SIGMARINE 28)(FLASH COAT)" },
+    { id: 246, fecha: "17 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12243", factura: "TC # 0766", cuenta: "ESCOPICO", monto: 7760.00, montoSinIva: 6689.66, producto: "(PRO 1000)(SELLADOR CLASICO)" },
+    { id: 247, fecha: "20 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12279", factura: "TC # 0767", cuenta: " ING NATHANAEL LEON", monto: 4560.80, montoSinIva: 3931.72, producto: "(PRACTIKA)(SELLLADOR)" },
+    { id: 248, fecha: "20 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 122284", factura: "FICCXX - 6819", cuenta: "ENALTO", monto: 3225.75, montoSinIva: 2780.82, producto: "(VINIMEX 3 EN 1)" },
+    { id: 249, fecha: "20 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12295", factura: "FICCXX - 6820", cuenta: "HERREIRA 42S", monto: 2721.17, montoSinIva: 2345.84, producto: "(ESMALTE 100)(FLASH COAT)" },
+    { id: 250, fecha: "23 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12310", factura: "FICCXX - 6829", cuenta: "GRUPO PYRGOS", monto: 20595.58, montoSinIva: 17754.81, producto: "(ACQUA100)(VINIMEX TOTAL)(ACCESORIOS)" },
     
     
     
