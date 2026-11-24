@@ -231,7 +231,7 @@ const rawTransactions = [
     { id: 228, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12125", factura: "TC # - 0746", cuenta: "ING EDUARDO", monto: 3822.43, montoSinIva: 3295.20, producto: "(SOLUTION PRO)(ALKAFIN)(ACCESORIOS" },
     { id: 229, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "TICKET DIRECTO", factura: "TC # - 0747", cuenta: "ESCOPICO", monto: 1853.68, montoSinIva: 1598.00, producto: "(PRO 1000)" },
     { id: 230, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12129", factura: "FICCXX - 6718", cuenta: "GRUPO PYRGOS", monto: 6175.28, montoSinIva: 5323.52, producto: "(VINIMEX CLASICA)(ACCESORIOS)" },
-    { id: 231, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12118", factura: "FICCXX - 6719", cuenta: "CONSTRUET", monto: 1846.72, montoSinIva: 1592.00, producto: "(PRO 1000)" },
+    { id: 231, fecha: "06 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12118", factura: "FICCXX - 6719", cuenta: "CONSTRUET", monto: 21658.00, montoSinIva: 18670.69, producto: "(PRO 1000)" },
     { id: 232, fecha: "09 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12135", factura: "FICCXX - 6726", cuenta: "ADSA", monto: 11692.90, montoSinIva: 10080.09, producto: "(SOLUTION PRO)" },
     { id: 233, fecha: "09 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12148", factura: "TC # 0754", cuenta: "CONSTRUET", monto: 1846.72, montoSinIva: 1592.00, producto: "(PRO 1000)" },
     { id: 234, fecha: "11 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12019", factura: "FICCXX - 6746", cuenta: "COLONOS TORRE UNO", monto: 619.12, montoSinIva: 533.72, producto: "(RD+MIX)" },
