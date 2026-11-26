@@ -253,6 +253,13 @@ const rawTransactions = [
     { id: 250, fecha: "23 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12310", factura: "FICCXX - 6829", cuenta: "GRUPO PYRGOS", monto: 20595.58, montoSinIva: 17754.81, producto: "(ACQUA100)(VINIMEX TOTAL)(ACCESORIOS)" },
     { id: 251, fecha: "24 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 13329", factura: "TC # - 0771", cuenta: "ING EDUARDO [ALTABRISA51]", monto: 1691.20, montoSinIva: 1457.93, producto: "(SOLUTION PRO)(SELLADOR CLASICO)" },
     { id: 252, fecha: "24 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12326", factura: "FICCXX - 6838", cuenta: "GRUPO PYRGOS", monto: 991.00, montoSinIva: 854.321, producto: "(TOP IMPER A REFORZADO)(ACCESORIOS)" },
+    { id: 253, fecha: "25 NOV 26", mes: "NOVIEMBRE", cotizacion: "TICKET DIRECTO", factura: "TC # - 0777", cuenta: "ING JAIME NIGMO", monto: 254.00, montoSinIva: 218.97, producto: "(TOP IMPER A REFORZADO)(ACCESORIOS)" },
+    { id: 254, fecha: "25 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12344", factura: "FICCXX - 6848", cuenta: "ADSA", monto: 2923.20, montoSinIva: 2520.00, producto: "(SOLUTION PRO)" },
+    { id: 252, fecha: "25 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12350", factura: "FICCXX - 6851", cuenta: "ALUPREMIER", monto: 6818.48, montoSinIva: 5878.00, producto: "(SIGMARINE 28)(FLASH COAT)" },
+    { id: 252, fecha: "25 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12361", factura: "FICCXX - 6854", cuenta: "GRUPO PYRGOS", monto: 6186.06, montoSinIva: 5332.82, producto: "(ESSENTIAL PRO IMPERMEABILIZANTE)" },
+    { id: 252, fecha: "26 NOV 26", mes: "NOVIEMBRE", cotizacion: "TICKET DIRECTO", factura: "TC # - 0781", cuenta: "ESCOPICO", monto: 3692.00, montoSinIva: 3182.76, producto: "(PRO 1000)" },
+    { id: 252, fecha: "26 NOV 26", mes: "NOVIEMBRE", cotizacion: "TICKET DIRECTO", factura: "TC # - 0782", cuenta: "ING JAIME NIGMO", monto: 34603.99, montoSinIva: 29831.03, producto: "(VINIMEX CLASICA)(SELLADOR CLASICO)" },
+    { id: 252, fecha: "27 NOV 26", mes: "NOVIEMBRE", cotizacion: "220 - 12363", factura: "TC # - 0781", cuenta: "ING CARLOS CASTELLANOS", monto: 9329.79, montoSinIva: 8042.92, producto: "(SOLUTION PRO)" },
     
     
     
